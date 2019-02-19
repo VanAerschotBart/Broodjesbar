@@ -14,16 +14,32 @@ if (isset($_SESSION["id"])) {
         if(isset($_POST["order"])) {
             $broodjesSvc = new BroodjesService();
             $idList = $broodjesSvc->getIds();
+            $count = 0;
             
             foreach($idList as $id) {
                 
                 if($_POST[$id]>0) {
+                    $count++;
                     $amount = $_POST[$id];
+                    
+                    if($amount>50) {
+                        $amount = 50;
+                    }
+                    
                     $orderSvc = new orderService();
                     $orderSvc->newLine($id, $amount);
                     //print($_POST[$id]);
                 }
                 
+            }
+            
+            if($count>0) {
+                $id = ;  // fuck fuck fuck fuck fuck fuck fuck fuck
+                $date = date();
+                $userId = $_SESSION["id"];
+                $extra = $_POST["extra"];
+                $orderSvc = new orderService();
+                $orderSvc->newOrder($id, $userId, $date, $extra);
             }
             
         }

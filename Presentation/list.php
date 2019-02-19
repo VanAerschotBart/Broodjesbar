@@ -45,27 +45,14 @@
                     print("<a href='delete.php?id='" . $value->getId() . "'>Verwijderen</a>");
                 }
                 else {
-                    print("
-                            <select>
-                    ");
-                        
-                    for($i=0; $i<10; $i++) {
-                        print("
-                                <option name='" . $value->getId() . "' value='" . $i . "'>" . $i . "</option>
-                        ");
+                    print("<input type='number' name='" . $value->getId() . "' min='0' max='50'>");
                     }
-                        
-                    print("</select>");
+                      
                 }
             ?>
                             
                         </td>
-                    </tr>
-    
-            <?php                    
-            }                
-            ?>      
-                            
+                    </tr>  
                 </table>
     
             <?php
