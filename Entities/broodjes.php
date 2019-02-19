@@ -1,0 +1,48 @@
+<?php  //entities/broodjes.php BROODJESBAR
+
+namespace entities;
+
+class Broodjes {
+    
+    private $id;
+    private $name;
+    private $description;
+    private $price;
+    
+    public function __construct($id, $name, $description, $price) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->description = $description;
+        $this->price = $price;
+    }
+    
+    public static function create($id, $name, $description, $price) {
+        $list = new Broodjes($id, $name, $description, $price);
+        return $list;
+    }
+    
+    public function setID($id) {
+        $this->id = $id;
+    }
+    
+    public function getID() {
+        $id = $this->id;
+        return $id;
+    }
+    
+    public function getName() {
+        $name = $this->name;
+        return $name;
+    }
+    
+    public function getDescription() {
+        $description = $this->description;
+        return $description;
+    }
+    
+    public function getPrice() {
+        $price = $this->price;
+        return $price;
+    }
+    
+}
