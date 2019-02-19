@@ -1,11 +1,26 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Gegenereerd op: 19 feb 2019 om 14:12
+-- Serverversie: 10.1.37-MariaDB
+-- PHP-versie: 7.3.0
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `broodjesbar`
 --
-CREATE DATABASE IF NOT EXISTS `broodjesbar` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `broodjesbar`;
 
 -- --------------------------------------------------------
 
@@ -37,6 +52,54 @@ INSERT INTO `broodjes` (`ID`, `Naam`, `Omschrijving`, `Prijs`) VALUES
 (10, 'Wrap exotisch', 'kip natuur, cocktailsaus, sla, tomaat, komkommer, ei en ananas', '3.70'),
 (11, 'Wrap kip/spek', 'Kip natuur, spek, BBQ saus, sla, tomaat en komkommer', '4.00');
 
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `iets`
+--
+
+CREATE TABLE `iets` (
+  `broodjesId` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `orderId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `time` datetime NOT NULL,
+  `extra` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `employee` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `employee`) VALUES
+(1, 'Bart', 'vanaerschotb@hotmail.com', '$2y$10$xBn/9eN6jh0NNBxDwTHrCONr.aPz9dP4BHGmK6JNA75H7uk.ekzXy', 1),
+(13, 'Jos', 'iets@wat.hier', '$2y$10$rk4qzNtXIGjHLvU/.6Z92ehZSYuklNZiZf/5bqmLv4PoElZfvq2Xy', 0),
+(14, 'Bart', 'gebruikersnaam@domainnaam.landcode', '$2y$10$s3nEKW0ED2ApYSpnhkIWC.MDadU0Ue8ChTw/XbnaWoCz4/ZwAsrI.', 0);
+
 --
 -- Indexen voor geëxporteerde tabellen
 --
@@ -48,6 +111,18 @@ ALTER TABLE `broodjes`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexen voor tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
@@ -56,6 +131,20 @@ ALTER TABLE `broodjes`
 --
 ALTER TABLE `broodjes`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT voor een tabel `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
