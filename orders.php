@@ -34,7 +34,6 @@ if (isset($_SESSION["id"])) {
             }
             
             if($count>0) {
-                $id = ;  // fuck fuck fuck fuck fuck fuck fuck fuck
                 $placed = date();
                 $userId = $_SESSION["id"];
                 $extra = $_POST["extra"];
