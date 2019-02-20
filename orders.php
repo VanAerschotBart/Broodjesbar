@@ -35,11 +35,11 @@ if (isset($_SESSION["id"])) {
             
             if($count>0) {
                 $id = ;  // fuck fuck fuck fuck fuck fuck fuck fuck
-                $date = date();
+                $placed = date();
                 $userId = $_SESSION["id"];
                 $extra = $_POST["extra"];
                 $orderSvc = new orderService();
-                $orderSvc->newOrder($id, $userId, $date, $extra);
+                $orderSvc->newOrder($id, $userId, $placed, $extra);
             }
             
         }
