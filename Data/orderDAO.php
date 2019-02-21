@@ -86,7 +86,7 @@ class OrderDAO {
             $sql .= "(" . $line->getBroodjesId() . ", " . $line->getAmount() . ", " . $line->getOrderId() . " ), ";
         }
         
-        $sql = rtrim($sql, ',');
+        $sql = rtrim($sql, ', ');
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
