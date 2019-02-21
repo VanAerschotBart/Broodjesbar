@@ -10,6 +10,12 @@ class OrderService {
         return $order;
     }
     
+    public function getAllOrders() {
+        $orderDAO = new $orderDAO();
+        $orders = $orderDAO->getAllOrders();
+        return $orders;
+    }
+    
     public function getOrderByOrderId($id) {
         $orderDAO = new $orderDAO();
         $order = $orderDAO->getByOrderId($id);

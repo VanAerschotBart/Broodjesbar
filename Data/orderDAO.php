@@ -53,14 +53,14 @@ class OrderDAO {
         
     }
 
-    public function getOrderByUserId($userId) {
+    public function getOrderSByUserId($userId) {
             
         $sql = "SELECT * FROM orders WHERE userId = :userId";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute([':userId' => $userId]);
         
-        if ($stmt->rowCount() > 0) {
+        if ($stmt->rowCount() > 0) {  //FOREACH PLAATSEN
             
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -93,6 +93,23 @@ class OrderDAO {
         $dbh = null;
     }
     
-}
+    public function getAllOrders() {
+        $sql = "SELECT * FROM orders";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() > 0) {  //FOREACH PLAATSEN
+            
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-//GIT TEST
+            $order = entities\Order::create(
+                $row['id'],
+                $row['userId'],
+                $row['placed'],
+                $row['extra'],
+                $row['status']
+            );
+        }
+    }
+}

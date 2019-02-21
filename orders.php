@@ -60,13 +60,13 @@ if (isset($_SESSION["userId"])) {
             
         }
         
-        print_r($order);
-        print_r($lines);
-        //$orderSvc = new orderService();
-        //$list = $orderSvc->getOrderByUserId();
-        //include("presentation/orders.php");
+        //USERLIST
+        $orderSvc = new orderService();
+        $list = $orderSvc->getOrderByUserId();
+        include("presentation/orders.php");
     }
     elseif($_SESSION["employee"] == 1) {
+        //EMPLOYEELIST
         header("location: 1");
         exit(0);
         $orderSvc = new orderService();
