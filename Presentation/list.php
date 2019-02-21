@@ -110,7 +110,6 @@
         
         <?php
         }
-        print($user->getID());
         ?>
         
     </body>

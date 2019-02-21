@@ -10,15 +10,21 @@ class AccountService {
         return $order;
     }
     
-    public function getByOrderId($id) {
+    public function getOrderByOrderId($id) {
         $orderDAO = new $orderDAO();
         $order = $orderDAO->getByOrderId($id);
         return $order;
     }
     
-    public function getByUserId($id) {
+    public function getOrderByUserId($id) {
         $orderDAO = new $orderDAO();
         $order = $orderDAO->getByUserId($id);
+        return $order;
+    }
+    
+    public function setNewLines($lines) {
+        $orderDAO = new $orderDAO();
+        $order = $orderDAO->setNewLines($lines);
         return $order;
     }
     

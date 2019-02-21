@@ -15,7 +15,4 @@ if(isset($_SESSION["errorText"])) {
 $broodjesSvc = new BroodjesService();
 $list = $broodjesSvc->getList();
 
-$accSvc = new AccountService();
-$user = $accSvc->getByEmail($_SESSION["email"]);
-
 include("presentation/list.php");

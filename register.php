@@ -50,10 +50,10 @@ if(isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password1"])
                        0
                    );
                    $accSvc = new Accountservice();
-                   $account = $accSvc->setNewUser($account);
-                   $id = $account->getId();
+                   $addedAccount = $accSvc->setNewUser($account);
+                   $id = $addedAccount->getId();
                    $_SESSION["employee"] = 0;
-                   $_SESSION["id"] = $id;
+                   $_SESSION["userId"] = $id;
                    $_SESSION["name"] = $name;
                    $_SESSION["email"] = $email;
                    header("Location: list.php");

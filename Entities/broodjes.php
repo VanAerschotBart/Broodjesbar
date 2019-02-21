@@ -21,11 +21,11 @@ class Broodjes {
         return $list;
     }
     
-    public function setID($id) {
+    public function setId($id) {
         $this->id = $id;
     }
     
-    public function getID() {
+    public function getId() {
         $id = $this->id;
         return $id;
     }

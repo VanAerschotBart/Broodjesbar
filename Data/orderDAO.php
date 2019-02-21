@@ -2,28 +2,32 @@
 
 require_once("DBconfig.php");
 require_once("entities/orders.php");
+require_once("entities/lines.php");
 
 class OrderDAO {
 
     public function setNewOrder($order) {
         
-        $sql = "INSERT INTO orders (id, userId, placed, extra) VALUES (:id, :userId, :placed, :extra)";
+        $sql = "INSERT INTO orders (userId, placed, extra) VALUES (:id, :userId, :placed, :extra)";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute([
-            ':id' => $order->getID(),
             ':userId' => $order->getUserID(),
             ':placed' => $order->getPlaced(),
             ':extra' => $order->getExtra()
         ]);
         
+        $orderId = $dbh->lastInsertId();
+        $order->setID($orderId);
+        
         $dbh = null;
+        
+        return $order;
         
     }
 
-    public function getByOrderId($id) {
+    public function getOrderByOrderId($id) {
         
-        $account = null;
         $sql = "SELECT * FROM orders WHERE id = :id";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
@@ -47,9 +51,8 @@ class OrderDAO {
         
     }
 
-    public function getByUserId($userId) {
+    public function getOrderByUserId($userId) {
             
-        $account = null;
         $sql = "SELECT * FROM orders WHERE userId = :userId";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
@@ -71,6 +74,20 @@ class OrderDAO {
         
         return $order;
         
+    }
+    
+    public function setNewLines($lines) {
+        $sql = "INSERT INTO lines (broodjesId, amount, orderId) VALUES ";
+        
+        foreach($lines as $line) {
+            $sql += "(" . $line->getBroodjesId . ", " . $line->getAmount . ", " . $line->getOrderId . " ), ";
+        }
+        
+        $sql -= ",";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        $dbh = null;
     }
     
 }

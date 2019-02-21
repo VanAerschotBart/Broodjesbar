@@ -1,6 +1,6 @@
 <?php  //entities/orders.php BROODJESBAR
 
-namespace orders;
+namespace entities;
 
 class Orders {
     
@@ -16,17 +16,17 @@ class Orders {
         $this->extra = $extra;
     }
     
-    public static function create($id, $userId, $placed, $extra) {
-        $order = new Order($id, $userId, $placed, $extra);
+    public static function create($userId, $placed, $extra, $status) {
+        $order = new Order($userId, $placed, $extra, $status);
         return $order;
     }
     
-    public function getID() {
+    public function getId() {
         $id = $this->id;
         return $id;
     }
     
-    public function getUserID() {
+    public function getUserId() {
         $userId = $this->userId;
         return $userId;
     }

@@ -7,28 +7,53 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if (isset($_SESSION["id"])) {
+if (isset($_SESSION["userId"])) {
     
     if($_SESSION["employee"] == 0) {
         
         if(isset($_POST["order"])) {
             $broodjesSvc = new BroodjesService();
             $idList = $broodjesSvc->getIds();
-            $count = 0;
+            $count = 0; 
+            $lines = array();
             
             foreach($idList as $id) {
                 
                 if($_POST[$id]>0) {
                     $count++;
+                    
+                    if($count === 1) {
+                        $placed = date(Y-m-d G:i:s);
+                        $order = entities\Orders::create(
+                            null,
+                            $_SESSION["userId"],
+                            $placed,
+                            $_POST["sidenote"],
+                            0
+                        );
+                        $orderSvc = new OrderService();
+                        $addedOrder = $orderSvc->setNewOrder($order);
+                        $orderId = $addedOrder->getId();
+                        return $orderId;
+                    }
+                    
                     $amount = $_POST[$id];
                     
                     if($amount>50) {
                         $amount = 50;
                     }
                     
-                    $orderSvc = new orderService();
-                    $orderSvc->newLine($id, $amount);
-                    //print($_POST[$id]);
+                    $line = entities\Lines::create(
+                        $id,
+                        $amount,
+                        $orderId
+                    );
+                    array_push($lines, $line);
+                }
+                
+                if ($count>0) {
+                    $orderSvc = new OrderService();
+                    $orderSvc->setNewLines($lines);
                 }
                 
             }
@@ -44,7 +69,7 @@ if (isset($_SESSION["id"])) {
         }
         
         $orderSvc = new orderService();
-        $list = $orderSvc->getPersonalOrder();        
+        $list = $orderSvc->getOrderByUserId();        
         include("presentation/orders.php");
     }
     elseif($_SESSION["employee"] == 1) {
