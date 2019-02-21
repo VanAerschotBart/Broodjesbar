@@ -15,8 +15,8 @@ class Lines {
     }
     
     public static function create($broodjesId, $amount, $orderId) {
-        $user = new Line($broodjesId, $amount, $orderId);
-        return $user;
+        $line = new Line($broodjesId, $amount, $orderId);
+        return $line;
     }
     
     public function getBroodjesId() {
