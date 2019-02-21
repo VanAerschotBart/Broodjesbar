@@ -34,7 +34,7 @@ if(isset($_POST["email"]) || isset($_POST["password"])) {  //is there an input?
                 
                     if(password_verify($password, $answer->getPassword())) {  //is the password correct?
                         $_SESSION["employee"] = $answer->getEmployee();
-                        $_SESSION["id"] = $answer->getId();
+                        $_SESSION["userId"] = $answer->getId();
                         $_SESSION["name"] = $answer->getName();
                         $_SESSION["email"] = $email;
                         $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;  //I need these parameters to make localhost store the cookie, otherwise they act like a session, remembered but gone as soon as the browser closes

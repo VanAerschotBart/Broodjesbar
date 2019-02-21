@@ -15,7 +15,7 @@ class Lines {
     }
     
     public static function create($broodjesId, $amount, $orderId) {
-        $line = new Line($broodjesId, $amount, $orderId);
+        $line = new Lines($broodjesId, $amount, $orderId);
         return $line;
     }
     

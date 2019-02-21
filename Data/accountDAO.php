@@ -17,8 +17,8 @@ class AccountDAO {
             ':employee' => $account->getEmployee()
         ]);
 
-        $accountID = $dbh->lastInsertId();
-        $account->setID($accountID);
+        $accountId = $dbh->lastInsertId();
+        $account->setId($accountId);
         
         $dbh = null;
         

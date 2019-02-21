@@ -8,17 +8,23 @@ class Orders {
     private $userId;
     private $placed;
     private $extra;
+    private $status;
     
-    public function __construct($id, $userId, $placed, $extra) {
+    public function __construct($id, $userId, $placed, $extra, $status) {
         $this->id = $id;
         $this->userId = $userId; 
         $this->placed = $placed;
         $this->extra = $extra;
+        $this->status =  $status;
     }
     
-    public static function create($userId, $placed, $extra, $status) {
-        $order = new Order($userId, $placed, $extra, $status);
+    public static function create($id, $userId, $placed, $extra, $status) {
+        $order = new Orders($id, $userId, $placed, $extra, $status);
         return $order;
+    }
+    
+    public function setId($id) {
+        $this->id = $id;
     }
     
     public function getId() {
@@ -39,6 +45,11 @@ class Orders {
     public function getExtra() {
         $extra = $this->extra;
         return $extra;
+    }
+    
+    public function getStatus() {
+        $status = $this->status;
+        return $status;
     }
     
 }

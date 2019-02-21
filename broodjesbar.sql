@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 19 feb 2019 om 14:12
+-- Gegenereerd op: 21 feb 2019 om 16:00
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.3.0
 
@@ -55,14 +55,22 @@ INSERT INTO `broodjes` (`ID`, `Naam`, `Omschrijving`, `Prijs`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `iets`
+-- Tabelstructuur voor tabel `linez`
 --
 
-CREATE TABLE `iets` (
+CREATE TABLE `linez` (
   `broodjesId` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `orderId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `linez`
+--
+
+INSERT INTO `linez` (`broodjesId`, `amount`, `orderId`) VALUES
+(1, 1, 6),
+(1, 10, 13);
 
 -- --------------------------------------------------------
 
@@ -73,9 +81,31 @@ CREATE TABLE `iets` (
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
-  `time` datetime NOT NULL,
-  `extra` text NOT NULL
+  `placed` datetime NOT NULL,
+  `extra` text NOT NULL,
+  `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `orders`
+--
+
+INSERT INTO `orders` (`id`, `UserId`, `placed`, `extra`, `status`) VALUES
+(1, 13, '2019-02-21 15:47:38', 'extra', 1),
+(2, 13, '2019-02-21 15:47:40', 'extra', 1),
+(3, 13, '2019-02-21 15:47:49', 'extra', 0),
+(4, 13, '2019-02-21 15:49:51', 'extra', 0),
+(5, 13, '2019-02-21 15:50:15', 'extra', 0),
+(6, 13, '2019-02-21 15:52:22', '', 0),
+(7, 13, '2019-02-21 15:55:39', 'yeah', 0),
+(8, 13, '2019-02-21 15:56:10', '', 0),
+(9, 13, '2019-02-21 15:56:24', '', 0),
+(10, 13, '2019-02-21 15:57:50', '', 0),
+(11, 13, '2019-02-21 15:58:16', '', 0),
+(12, 13, '2019-02-21 15:58:58', '', 0),
+(13, 13, '2019-02-21 15:59:17', '', 0),
+(14, 13, '2019-02-21 15:59:39', '', 0),
+(15, 13, '2019-02-21 16:00:03', '', 0);
 
 -- --------------------------------------------------------
 
@@ -98,7 +128,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `employee`) VALUES
 (1, 'Bart', 'vanaerschotb@hotmail.com', '$2y$10$xBn/9eN6jh0NNBxDwTHrCONr.aPz9dP4BHGmK6JNA75H7uk.ekzXy', 1),
 (13, 'Jos', 'iets@wat.hier', '$2y$10$rk4qzNtXIGjHLvU/.6Z92ehZSYuklNZiZf/5bqmLv4PoElZfvq2Xy', 0),
-(14, 'Bart', 'gebruikersnaam@domainnaam.landcode', '$2y$10$s3nEKW0ED2ApYSpnhkIWC.MDadU0Ue8ChTw/XbnaWoCz4/ZwAsrI.', 0);
+(15, 'Paul', 'gebruikersnaam@domainnaam.landcode', '$2y$10$hV6dsGsK285QZvHWgoy5/eTs0BhX951wTxCeGxmRYV816GNHSxzdO', 0);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -109,6 +139,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `employee`) VALUES
 --
 ALTER TABLE `broodjes`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexen voor tabel `linez`
+--
+ALTER TABLE `linez`
+  ADD KEY `orderId` (`orderId`);
 
 --
 -- Indexen voor tabel `orders`
@@ -136,13 +172,23 @@ ALTER TABLE `broodjes`
 -- AUTO_INCREMENT voor een tabel `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Beperkingen voor geëxporteerde tabellen
+--
+
+--
+-- Beperkingen voor tabel `linez`
+--
+ALTER TABLE `linez`
+  ADD CONSTRAINT `linez_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `orders` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

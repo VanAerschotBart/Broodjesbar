@@ -2,7 +2,7 @@
 
 require_once("data/orderDAO.php");
 
-class AccountService {
+class OrderService {
     
     public function setNewOrder($order) {
         $orderDAO = new OrderDAO();
@@ -23,7 +23,7 @@ class AccountService {
     }
     
     public function setNewLines($lines) {
-        $orderDAO = new $orderDAO();
+        $orderDAO = new orderDAO();
         $order = $orderDAO->setNewLines($lines);
         return $order;
     }

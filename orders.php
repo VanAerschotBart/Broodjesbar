@@ -14,16 +14,18 @@ if (isset($_SESSION["userId"])) {
         if(isset($_POST["order"])) {
             $broodjesSvc = new BroodjesService();
             $idList = $broodjesSvc->getIds();
+            $pointer = 0;
             $count = 0; 
             $lines = array();
             
-            foreach($idList as $id) {
+            foreach($idList as $ids) {
+                
+                $id = $ids[$pointer];
                 
                 if($_POST[$id]>0) {
                     $count++;
-                    
                     if($count === 1) {
-                        $placed = date(Y-m-d G:i:s);
+                        $placed = date("Y-m-d G:i:s");
                         $order = entities\Orders::create(
                             null,
                             $_SESSION["userId"],
@@ -34,7 +36,6 @@ if (isset($_SESSION["userId"])) {
                         $orderSvc = new OrderService();
                         $addedOrder = $orderSvc->setNewOrder($order);
                         $orderId = $addedOrder->getId();
-                        return $orderId;
                     }
                     
                     $amount = $_POST[$id];
@@ -42,7 +43,6 @@ if (isset($_SESSION["userId"])) {
                     if($amount>50) {
                         $amount = 50;
                     }
-                    
                     $line = entities\Lines::create(
                         $id,
                         $amount,
@@ -51,30 +51,26 @@ if (isset($_SESSION["userId"])) {
                     array_push($lines, $line);
                 }
                 
-                if ($count>0) {
-                    $orderSvc = new OrderService();
-                    $orderSvc->setNewLines($lines);
-                }
-                
             }
             
-            if($count>0) {
-                $placed = date();
-                $userId = $_SESSION["id"];
-                $extra = $_POST["extra"];
-                $orderSvc = new orderService();
-                $orderSvc->newOrder($id, $userId, $placed, $extra);
+            if ($count>0) {
+                $orderSvc = new OrderService();
+                $orderSvc->setNewLines($lines);
             }
             
         }
         
-        $orderSvc = new orderService();
-        $list = $orderSvc->getOrderByUserId();        
-        include("presentation/orders.php");
+        print_r($order);
+        print_r($lines);
+        //$orderSvc = new orderService();
+        //$list = $orderSvc->getOrderByUserId();
+        //include("presentation/orders.php");
     }
     elseif($_SESSION["employee"] == 1) {
+        header("location: 1");
+        exit(0);
         $orderSvc = new orderService();
-        $list = $orderSvc->getAllOrders();        
+        $list = $orderSvc->getAllOrders();
         include("presentation/orders.php");
     }
     else {
