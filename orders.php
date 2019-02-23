@@ -11,6 +11,7 @@ if (isset($_SESSION["userId"])) {
     
     if($_SESSION["employee"] == 0) {
         
+        //placing orders if there are any
         if(isset($_POST["order"])) {
             $broodjesSvc = new BroodjesService();
             $idList = $broodjesSvc->getIds();
@@ -60,15 +61,12 @@ if (isset($_SESSION["userId"])) {
             
         }
         
-        //USERLIST
+        //displaying orders
         $orderSvc = new orderService();
-        $list = $orderSvc->getOrderByUserId();
+        $list = $orderSvc->getOrdersByUserId($_SESSION["userId"]);
         include("presentation/orders.php");
     }
     elseif($_SESSION["employee"] == 1) {
-        //EMPLOYEELIST
-        header("location: 1");
-        exit(0);
         $orderSvc = new orderService();
         $list = $orderSvc->getAllOrders();
         include("presentation/orders.php");

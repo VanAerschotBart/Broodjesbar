@@ -38,7 +38,7 @@ class OrderDAO {
             
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $order = entities\Order::create(
+            $order = entities\Orders::create(
                 $row['id'],
                 $row['userId'],
                 $row['placed'],
@@ -53,29 +53,33 @@ class OrderDAO {
         
     }
 
-    public function getOrderSByUserId($userId) {
+    public function getOrdersByUserId($id) {
             
         $sql = "SELECT * FROM orders WHERE userId = :userId";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
-        $stmt->execute([':userId' => $userId]);
+        $stmt->execute([':userId' => $id]);
         
-        if ($stmt->rowCount() > 0) {  //FOREACH PLAATSEN
+        if ($stmt->rowCount() > 0) {
             
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            $order = entities\Order::create(
-                $row['id'],
-                $row['userId'],
-                $row['placed'],
-                $row['extra'],
-                $row['status']
-            );
+            $list = array();
+            
+            foreach($stmt as $row) {
+                
+                $order = entities\Orders::create(
+                    $row['id'],
+                    $row['userId'],
+                    $row['placed'],
+                    $row['extra'],
+                    $row['status']
+                );
+                array_push($list, $order);
+            }
         }
         
         $dbh = null;
         
-        return $order;
+        return $list;
         
     }
     
@@ -99,17 +103,25 @@ class OrderDAO {
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         
-        if ($stmt->rowCount() > 0) {  //FOREACH PLAATSEN
+        if ($stmt->rowCount() > 0) {
             
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            $order = entities\Order::create(
-                $row['id'],
-                $row['userId'],
-                $row['placed'],
-                $row['extra'],
-                $row['status']
-            );
+            $list = array();
+            
+            foreach($stmt as $row) {
+                
+                $order = entities\Orders::create(
+                    $row['id'],
+                    $row['userId'],
+                    $row['placed'],
+                    $row['extra'],
+                    $row['status']
+                );
+                array_push($list, $order);
+            }
         }
+        
+        $dbh = null;
+        
+        return $list;
     }
 }

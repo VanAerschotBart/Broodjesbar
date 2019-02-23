@@ -56,6 +56,8 @@ if(isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password1"])
                    $_SESSION["userId"] = $id;
                    $_SESSION["name"] = $name;
                    $_SESSION["email"] = $email;
+                   $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;  //I need these parameters to make localhost store the cookie, otherwise they act like a session, remembered but gone as soon as the browser closes
+                        setcookie("user", $email, time()+60*60*24*365, '/', $domain, false);
                    header("Location: list.php");
                    exit(0);
                }

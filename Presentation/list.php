@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>  <!-- presentation/listUser.php BROODJESBAR -->
+<!DOCTYPE HTML>  <!-- presentation/list.php BROODJESBAR -->
 <html>
     <head>
         <meta charset="utf-8">

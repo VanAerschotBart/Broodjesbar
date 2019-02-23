@@ -11,25 +11,25 @@ class OrderService {
     }
     
     public function getAllOrders() {
-        $orderDAO = new $orderDAO();
+        $orderDAO = new OrderDAO();
         $orders = $orderDAO->getAllOrders();
         return $orders;
     }
     
     public function getOrderByOrderId($id) {
-        $orderDAO = new $orderDAO();
+        $orderDAO = new OrderDAO();
         $order = $orderDAO->getByOrderId($id);
         return $order;
     }
     
-    public function getOrderByUserId($id) {
-        $orderDAO = new $orderDAO();
-        $order = $orderDAO->getByUserId($id);
+    public function getOrdersByUserId($id) {
+        $orderDAO = new OrderDAO();
+        $order = $orderDAO->getOrdersByUserId($id);
         return $order;
     }
     
     public function setNewLines($lines) {
-        $orderDAO = new orderDAO();
+        $orderDAO = new OrderDAO();
         $order = $orderDAO->setNewLines($lines);
         return $order;
     }
