@@ -8,108 +8,107 @@
         <h1>Lijst</h1>
         
         <?php
-        if(isset($_SESSION["employee"])) {
+        if(!isset($_SESSION["employee"])) {//if not logged in, build a log in and a link to register if unregistered user  
+        ?>    
+        
+        <form action='login.php' method='POST'>
+            
+        <?php            
+            if(isset($_COOKIE["user"])) {//check for known user
+                $mail = $_COOKIE["user"];
         ?>
-                    
-            <a href='logout.php'>Afmelden</a><br>
-            <a href='orders.php'>Bestellingen</a>
-        
-            <?php
-            if($_SESSION["employee"] == 0) {
-            ?>
-        
-            <form action='orders.php' method='POST'>
-                
-            <?php
-            }
-            ?>
-                
-                <table>
-                    <tr>
-                        <th>Broodje</th>
-                        <th>Beschrijving</th>
-                        <th>Prijs (€)</th>
-                    </tr>
+            
+            Email:<input type="email" name="email" value="<?php print($mail); ?>" required>
+            
         <?php
+            }
+            else {
+        ?>
+            
+            Email:<input type="email" name="email" required>
+            
+        <?php
+            }                
+        ?>
+            
+            Wachtwoord:<input type="password" name="password" required>
+            <input type="submit" value="Inloggen">
+        </form>
+        <a href="register.php">Registreer</a>
+            
+        <?php
+        }
+        else {  //logged in user, so build links to log out or go to their order(s)
+        ?>
+        
+        <a href="logout.php">Afmelden</a><br>
+        <a href="orders.php">Bestellingen</a>
+            
+        <?php
+        }
+        if(isset($_SESSION["employee"]) && $_SESSION["employee"] == 0) {  //check if a user is logged in and user is a costumer ,if so, the list will be in a form to order
+        ?>
+        
+        <form action='orders.php' method='POST'>
                 
-            foreach($list as $value) {
-                print("
-                    <tr>
-                        <td>" . $value->getName() . "</td>
-                        <td>" . $value->getDescription() . "</td>
-                        <td>" . $value->getPrice() . "</td>
-                        <td>
-                    ");
-                    
-                if($_SESSION["employee"] == 1) {
-                    print("<a href='adjust.php?id='" . $value->getId() . "'>Aanpassen</a> | ");
-                    print("<a href='delete.php?id='" . $value->getId() . "'>Verwijderen</a>");
-                }
-                else {
-                    print("<input type='number' name='" . $value->getId() . "' min='0' max='50'>");
-                    }
-                      
-                }
-            ?>
-                            
-                        </td>
-                    </tr>  
-                </table>
+        <?php
+        }
+        ?>
+                
+        <table>
+            <tr>
+                <th>Broodje</th>
+                <th>Beschrijving</th>
+                <th>Prijs (€)</th>
+            </tr>
+        <?php
+        foreach($list as $value) {  //building the list
+        ?>
+            <tr>
+                <td><?php print($value->getName()); ?></td>
+                <td><?php print($value->getDescription()); ?></td>
+                <td><?php print($value->getPrice()); ?></td>
+        
+        <?php
+            if(isset($_SESSION["employee"]) && $_SESSION["employee"] == 1) {  //if the logged in user is an employee, 2 links are created for deleting or adjusting a sandwich
+        ?>
+                  
+                <td>
+                    <a href="adjust.php?id=<?php print($value->getId()); ?>">Aanpassen</a> |
+                    <a href="delete.php?id=<?php print($value->getId()); ?>">Verwijderen</a>
+                </td>
+                
+        <?php
+            }
+            if(isset($_SESSION["employee"]) && $_SESSION["employee"] == 0){  //if costumer, an input field for the disered amount is added
+        ?>
+                  
+                <td>
+                    <input type="number" name="<?php print($value->getId()); ?>" min="0" max="50">
+                </td>
+            
+        <?php
+            }
+        ?>
+            </tr>
+            
+        <?php
+        }  //end of list building
+        ?>
+            
+        </table>
     
-            <?php
-            if($_SESSION["employee"] == 0) {
-            ?>
+        <?php
+        if(isset($_SESSION["employee"]) && $_SESSION["employee"] == 0) {  //if costumer, adding 2 extra input fields and closing the form
+        ?>
     
-                <input type='text' name='sidenote' placeholder='extra opmerkingen'>
-                <input type='hidden' name='order'>
-                <input type='submit' value='bestellen'>
-                <input type='reset' value='reset'>
-            </form>
+        <input type="text" name="sidenote" placeholder="extra opmerkingen">
+        <input type="hidden" name="order">
+        <input type="submit" value="bestellen">
+        <input type="reset" value="reset">
+        </form>
         
         <?php  
-            }
-        }
-        else{
-            ?>
-        
-                <form action='login.php' method='POST'>
-            
-                <?php            
-                if(isset($_COOKIE["user"])) {
-                    $mail = $_COOKIE["user"];
-                    print("Email:<input type='email' name='email' value='" . $mail . "' required>");
-                }
-                else {
-                    print("Email:<input type='email' name='email' required>");
-                }                
-                ?>
-            
-                    Wachtwoord:<input type='password' name='password' required>
-                    <input type='submit' value='Inloggen'>
-                </form>
-                <a href='register.php'>Registreer</a>
-                <table>
-                    <tr>
-                        <th>Broodje</th>
-                        <th>Beschrijving</th>
-                        <th>Prijs (€)</th>
-                    </tr>
-                    
-            <?php
-            foreach($list as $value) {
-                print("
-                    <tr>
-                        <td>" . $value->getName() . "</td>
-                        <td>" . $value->getDescription() . "</td>
-                        <td>" . $value->getPrice() . "</td>
-                    </tr>                
-                ");
-            }
-            ?>
-                    
-        </table>
-        
-        <?php
         }
         ?>
         
