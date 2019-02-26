@@ -11,7 +11,8 @@
         if(isset($_SESSION["employee"])) {
         ?>
                     
-            <a href='logout.php'>Afmelden</a>
+            <a href='logout.php'>Afmelden</a><br>
+            <a href='orders.php'>Bestellingen</a>
         
             <?php
             if($_SESSION["employee"] == 0) {
@@ -41,7 +42,7 @@
                     ");
                     
                 if($_SESSION["employee"] == 1) {
-                    print("<a href='adjust.php?id='" . $value->getId() . "'>Aanpassen</a>");
+                    print("<a href='adjust.php?id='" . $value->getId() . "'>Aanpassen</a> | ");
                     print("<a href='delete.php?id='" . $value->getId() . "'>Verwijderen</a>");
                 }
                 else {

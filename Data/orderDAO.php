@@ -98,14 +98,13 @@ class OrderDAO {
     }
     
     public function getAllOrders() {
+        $list = array();
         $sql = "SELECT * FROM orders";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         
         if ($stmt->rowCount() > 0) {
-            
-            $list = array();
             
             foreach($stmt as $row) {
                 

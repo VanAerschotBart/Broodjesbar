@@ -6,6 +6,11 @@
     </head>
     <body>
         <h1>Bestellingen</h1>
+            
+        <?php
+        if($list != null) {
+        ?>
+        
         <table>
             <tr>
                 <th>BestellingsId</th>
@@ -15,21 +20,30 @@
                 <th>Status</th>
             </tr>
             
-            <?php
+        <?php
             foreach($list as $value) {
-                print("
-                    <tr>
-                        <td>" . $value->getId() . "</td>
-                        <td>" . $value->getUserId() . "</td>
-                        <td>" . $value->getPlaced() . "</td>
-                        <td>" . $value->getExtra() . "</td>
-                        <td>" . $value->getStatus() . "</td>
-                    </tr>
-                ");
+        ?>
+                <tr>
+                    <td><?php print($value->getId()); ?></td>
+                    <td><?php print($value->getUserId()); ?></td>
+                    <td><?php print($value->getPlaced()); ?></td>
+                    <td><?php print($value->getExtra()); ?></td>
+                    <td><?php print($value->getStatus()); ?></td>
+                </tr>
+                
+            <?php
             }
             ?>
             
         </table>
+        
+        <?php
+        }
+        else {
+            print("<h1 style='color: red; text-decoration: underline;'>Er zijn geen bestellingen.</h1>");
+        }
+        ?>
+            
     </body>
 </html>
         
