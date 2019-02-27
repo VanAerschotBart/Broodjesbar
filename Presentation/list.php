@@ -8,7 +8,7 @@
         <h1>Lijst</h1>
         
         <?php
-        if(!isset($_SESSION["employee"])) {//if not logged in, build a log in and a link to register if unregistered user  
+        if(!isset($_SESSION["employee"])) {//if not logged in, build a log in and a link to register for unregistered user  
         ?>    
         
         <form action='login.php' method='POST'>
@@ -46,13 +46,6 @@
             
         <?php
         }
-        if(isset($_SESSION["employee"]) && $_SESSION["employee"] == 0) {  //check if a user is logged in and user is a costumer ,if so, the list will be in a form to order
-        ?>
-        
-        <form action='orders.php' method='POST'>
-                
-        <?php
-        }
         ?>
                 
         <table>
@@ -80,11 +73,10 @@
                 
         <?php
             }
-            if(isset($_SESSION["employee"]) && $_SESSION["employee"] == 0){  //if costumer, an input field for the disered amount is added
+            else {  //if costumer, an input field for the disered amount is added
         ?>
-                  
-                <td>
-                    <input type="number" name="<?php print($value->getId()); ?>" min="0" max="50">
+                <td>  
+                    <a href="orders.php?id=<?php print($value->getId()); ?>"><button>Bestellen</button></a>
                 </td>
             
         <?php
@@ -97,20 +89,5 @@
         ?>
             
         </table>
-    
-        <?php
-        if(isset($_SESSION["employee"]) && $_SESSION["employee"] == 0) {  //if costumer, adding 2 extra input fields and closing the form
-        ?>
-    
-        <input type="text" name="sidenote" placeholder="extra opmerkingen">
-        <input type="hidden" name="order">
-        <input type="submit" value="bestellen">
-        <input type="reset" value="reset">
-        </form>
-        
-        <?php  
-        }
-        ?>
-        
     </body>
 </html>
