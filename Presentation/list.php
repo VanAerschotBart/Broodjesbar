@@ -1,8 +1,8 @@
-<!DOCTYPE HTML>  <!-- presentation/list.php BROODJESBAR -->
+<!DOCTYPE HTML>  <!-- presentation/list.php FRITUUR -->
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Broodjesbar</title>
+        <title>Frituur</title>
     </head>
     <body>
         <h1>Lijst</h1>
@@ -50,7 +50,7 @@
                 
         <table>
             <tr>
-                <th>Broodje</th>
+                <th>Item</th>
                 <th>Beschrijving</th>
                 <th>Prijs (€)</th>
             </tr>

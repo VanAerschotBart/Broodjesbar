@@ -1,7 +1,7 @@
-<?php  //orders.php BROODJESBAR
+<?php  //orders.php FRITUUR
 
-require_once("business/broodjesService.php");
-require_once("business/orderService.php");
+require_once("business/itemsService.php");
+require_once("business/ordersService.php");
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -13,10 +13,10 @@ if (isset($_SESSION["userId"])) {
         
         if(isset($_GET["id"])) {  //placing item in waiting state for adjustments etc.
             $id = $_GET["id"];
-            $broodjesSvc = new BroodjesService();
-            $broodje = $broodjesSvc->getById($id);
+            $itemsSvc = new ItemsService();
+            $item = $itemsSvc->getById($id);
                 
-            if($broodje != null) {  //check for a valid broodjesId, if correct, load options
+            if($item != null) {  //check for a valid broodjesId, if correct, load options
                 
                 $active = true;
                 
@@ -43,25 +43,7 @@ if (isset($_SESSION["userId"])) {
                     $_SESSION["lines"] = array();
                 }
                 
-                if(!isset($_SESSION["amount"])) {
-                    $_SESSION["amount"] = array();
-                }
                 
-                if(!isset($_SESSION["sauce"])) {
-                    $_SESSION["sauce"] = array();
-                }
-                
-                if(!isset($_SESSION["topping"])) {
-                    $_SESSION["topping"] = array();
-                }
-                
-                if(!isset($_SESSION["addIngredient"])) {
-                    $_SESSION["addIngredient"] = array();
-                }
-                
-                if(!isset($_SESSION["removeIngredient"])) {
-                    $_SESSION["removeIngredient"] = array();
-                }
                 
                 
                 //making sure the amount is set and within limits
@@ -99,13 +81,9 @@ if (isset($_SESSION["userId"])) {
                     
                 }
                 
-                if(!empty($sauceArr)) {
-                    array_push($_SESSION["sauce"], $sauceArr);
+                if(empty($removeIngredientsArr)) {
+                    array_push($sauceArr, "");
                 }
-                else {
-                    array_push($_SESSION["sauce"], "");
-                }
-                
                 
                 //collecting the desired (extra) toppings
                 $toppingsSvc = new ToppingsService();
@@ -122,13 +100,9 @@ if (isset($_SESSION["userId"])) {
                     }
                 }
                 
-                if(!empty($toppingsArr)) {
-                    array_push($_SESSION["topping"], $toppingssArr);
+                if(empty($removeIngredientsArr)) {
+                    array_push($toppingsArr, "");
                 }
-                else {
-                    array_push($_SESSION["topping"], "");
-                }
-                
                 
                 //collecting the desired ingredients to be added
                 $ingredientsSvc = new IngredientsService();
@@ -147,13 +121,9 @@ if (isset($_SESSION["userId"])) {
                     
                 }
                 
-                if(!empty($addIngredientsArr)) {
-                    array_push($_SESSION["addIngredient"], $addIngredientsArr);
+                if(empty($removeIngredientsArr)) {
+                    array_push($addIngredientsArr, "");
                 }
-                else {
-                    array_push($_SESSION["addIngredient"], "");
-                }
-                
                 
                 //collecting the desired ingredients to be left out
                 foreach($ingredientsIdList as $id) {
@@ -167,14 +137,9 @@ if (isset($_SESSION["userId"])) {
                     
                 }
                 
-                if(!empty($removeIngredientsArr)) {
-                    array_push($_SESSION["removeIngredient"], $removeIngredientsArr);
+                if(empty($removeIngredientsArr)) {
+                    array_push($removeIngredientsArr, "");
                 }
-                else {
-                    array_push($_SESSION["removeIngredient"], "");
-                }
-                    
-                
                 
             }
             

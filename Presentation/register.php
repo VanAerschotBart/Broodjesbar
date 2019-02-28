@@ -1,8 +1,8 @@
-<!DOCTYPE HTML>  <!-- presentation/register.php  BROODJESBAR -->
+<!DOCTYPE HTML>  <!-- presentation/register.php  FRITUUR -->
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Broodjesbar</title>
+        <title>Frituur</title>
     </head>
     <body>
         <h1>Registreren</h1>

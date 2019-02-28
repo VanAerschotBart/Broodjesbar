@@ -1,4 +1,4 @@
-<?php //data/DBconfig.php BROODJESBAR
+<?php //data/DBconfig.php FRITUUR
 
 class DBConfig {
    public static $DB_CONNSTRING = "mysql:host=localhost;dbname=broodjesbar;charset=utf8";

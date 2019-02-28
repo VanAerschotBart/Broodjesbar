@@ -1,4 +1,4 @@
-<?php  //business/accountService.php BROODJESBAR
+<?php  //business/accountService.php FRITUUR
 
 require_once("data/accountDAO.php");
 

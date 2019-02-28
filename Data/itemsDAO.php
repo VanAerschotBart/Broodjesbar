@@ -1,12 +1,12 @@
-<?php  //data/broodjesDAO BROODJESBAR
+<?php  //data/itemsDAO FRITUUR
 
 require_once("DBconfig.php");
-require_once("entities/broodjes.php");
+require_once("entities/items.php");
 
-class BroodjesDAO {
+class ItemsDAO {
     
     public function getList() {
-        $sql = "SELECT * FROM broodjes";
+        $sql = "SELECT * FROM items";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
@@ -16,13 +16,13 @@ class BroodjesDAO {
             $list = array();
             
             foreach($stmt as $row) {
-                $broodje = entities\Broodjes::create(
+                $item = entities\Items::create(
                     $row['id'],
                     $row['naam'],
                     $row['omschrijving'],
                     $row['prijs']
                 );
-                array_push($list, $broodje);
+                array_push($list, $item);
             }
         }
         
@@ -33,7 +33,7 @@ class BroodjesDAO {
     }
     
     public function getIds() {
-        $sql = "SELECT id FROM broodjes";
+        $sql = "SELECT id FROM items";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
@@ -54,13 +54,13 @@ class BroodjesDAO {
     }
     
     public function getById($id) {
-        $sql = "SELECT * FROM broodjes WHERE id = :id";
+        $sql = "SELECT * FROM items WHERE id = :id";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute([':id' => $id]);
         
         if ($stmt->rowCount() > 0) {
-            $broodje = entities\Broodjes::create(
+            $item = entities\Items::create(
                 $stmt['id'],
                 $stmt['naam'],
                 $stmt['omschrijving'],
@@ -70,7 +70,7 @@ class BroodjesDAO {
         
         $dbh = null;
         
-        return $broodje;
+        return $item;
          
     }
 

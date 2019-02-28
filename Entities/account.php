@@ -1,4 +1,4 @@
-<?php  //entities/account.php BROODJESBAR
+<?php  //entities/account.php FRITUUR
 
 namespace entities;
 

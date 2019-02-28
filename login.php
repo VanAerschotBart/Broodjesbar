@@ -1,4 +1,4 @@
-<?php  //login.php BROODJESBAR
+<?php  //login.php FRITUUR
 
 
 if (session_status() == PHP_SESSION_NONE) {

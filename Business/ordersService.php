@@ -1,12 +1,12 @@
-<?php  //business/orderService.php BROODJESBAR
+<?php  //business/ordersService.php FRITUUR
 
-require_once("data/orderDAO.php");
+require_once("data/ordersDAO.php");
 
 class OrderService {
     
     public function setNewOrder($order) {
-        $orderDAO = new OrderDAO();
-        $order = $orderDAO->setNewOrder($order);
+        $ordersDAO = new OrdersDAO();
+        $order = $ordersDAO->setNewOrder($order);
         return $order;
     }
     

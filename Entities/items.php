@@ -1,8 +1,8 @@
-<?php  //entities/broodjes.php BROODJESBAR
+<?php  //entities/items.php FRITUUR
 
 namespace entities;
 
-class Broodjes {
+class Items {
     
     private $id;
     private $name;
@@ -17,7 +17,7 @@ class Broodjes {
     }
     
     public static function create($id, $name, $description, $price) {
-        $list = new Broodjes($id, $name, $description, $price);
+        $list = new Items($id, $name, $description, $price);
         return $list;
     }
     

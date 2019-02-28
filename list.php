@@ -1,6 +1,6 @@
-<?php  //list.php BROODJESBAR
+<?php  //list.php FRITUUR
 
-require_once("business/broodjesService.php");
+require_once("business/itemsService.php");
 require_once("business/accountService.php");
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -12,7 +12,7 @@ if(isset($_SESSION["errorText"])) {
     unset($_SESSION["errorText"]);
 }
 
-$broodjesSvc = new BroodjesService();
-$list = $broodjesSvc->getList();
+$itemsSvc = new ItemsService();
+$list = $itemsSvc->getList();
 
 include("presentation/list.php");

@@ -1,4 +1,4 @@
-<?php  //register.php  BROODJESBAR
+<?php  //register.php  FRITUUR
 
 require_once("business/accountService.php");
 
