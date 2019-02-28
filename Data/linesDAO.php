@@ -19,4 +19,30 @@ class LinesDAO {
         $dbh = null;
     }
     
+    public function getLinesByOrderId($id) {
+        
+        $sql = "SELECT * FROM orderLines WHERE id = :id";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        
+        if ($stmt->rowCount() > 0) {
+            
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $order = entities\Orders::create(
+                $row['id'],
+                $row['itemId'],
+                $row['orderId'],
+                $row['extra'],
+                $row['status']
+            );
+        }
+        
+        $dbh = null;
+        
+        return $order;
+        
+    }
+    
 }
