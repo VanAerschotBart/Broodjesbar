@@ -63,7 +63,7 @@ if (isset($_SESSION["userId"])) {
                 
                 //building arrays containing 
                 
-                //first we check if selected, if selected the id goes into a local array which then gets put in a session array, so the session array is a multidim array containing arrays, if the local array is empty, an empty space will be added to the session array so the amount of lines in each session array will be the same and equal to the amount of items in the order, this is for easy extraction of the data
+                //first we check if selected, if selected the id goes into an array if the array is empty, an empty space will be added to the array so the amount of lines in each array will be the same and equal to the amount of items in the order, this is for easy extraction of the data
                 
                 //collecting the desired (extra) sauces
                 $sauceSvc = new SauceService();
