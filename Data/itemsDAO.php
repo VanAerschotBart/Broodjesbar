@@ -1,4 +1,4 @@
-<?php  //data/itemsDAO FRITUUR
+<?php  //data/itemsDAO.php FRITUUR
 
 require_once("DBconfig.php");
 require_once("entities/items.php");

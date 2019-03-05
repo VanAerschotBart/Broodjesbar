@@ -19,7 +19,7 @@
                 <td><?php print($item->getPrice()); ?></td>
             </tr>
         </table>
-        <form action="orders.php" method="POST">
+        <form action="basket.php" method="POST">
             <ul style="list-style-type: none;">
                 <li><h3>Sauzen</h3></li>
             
@@ -82,7 +82,7 @@
         ?>
         
             </ul>
-            <input type="hidden" name="basket">
+            <input type="hidden" name="create">
             <input type="number" name="amount" value="1" required><br>
             <input type="submit" value="In winkelmandje plaatsen">
             <input type="reset" value="Reset">

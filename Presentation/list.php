@@ -73,7 +73,7 @@
                 
         <?php
             }
-            else {  //if costumer, an input field for the disered amount is added
+            elseif(isset($_SESSION["employee"]) && $_SESSION["employee"] == 0) {  //if costumer, an input field for the disered amount is added
         ?>
                 <td>  
                     <a href="orders.php?id=<?php print($value->getId()); ?>"><button>Bestellen</button></a>
