@@ -72,7 +72,7 @@ class ItemsDAO {
                 $row['price']
             );
             $dbh = null;
-            return $list;
+            return $item;
         }
         else {
             $dbh = null;

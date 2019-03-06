@@ -24,7 +24,8 @@
                 <li><h3>Sauzen</h3></li>
             
         <?php
-            foreach($sauceList as $sauce) {  //print list of sauces
+            if(isset($ingredientList) && $ingredientList != null) {
+                foreach($sauceList as $sauce) {  //print list of sauces
         ?>
                 
                 <li>
@@ -32,14 +33,23 @@
                     <?php print($sauce->getName()); ?>
                 </li>
                 
-        <?php    
+        <?php
+                }
+            }
+            else {
+        ?>
+                
+                <li style="color: red;">Geen sauzen gevonden</li>      
+        
+        <?php
             }
         ?>
                 
                 <li><h3>Toppings</h3></li>
                 
         <?php
-            foreach($toppingList as $topping) {  //print list of toppings
+            if(isset($ingredientList) && $ingredientList != null) {
+                foreach($toppingList as $topping) {  //print list of toppings
         ?>
                 
                 <li>
@@ -48,13 +58,22 @@
                 </li>
                 
         <?php    
+                }
+            }
+            else {
+        ?>
+                
+                <li style="color: red;">Geen toppings gevonden</li>      
+        
+        <?php
             }
         ?>
                 
                 <li><h3>Ingrediënten toevoegen</h3></li>
        
         <?php
-            foreach($ingredientList as $ingredient) {  //print list of ingredients to add
+            if(isset($ingredientList) && $ingredientList != null) {
+                foreach($ingredientList as $ingredient) {  //print list of ingredients to add
         ?>
                 
                 <li>
@@ -63,13 +82,22 @@
                 </li>
                 
         <?php    
+                }
+            }
+            else {
+        ?>
+                
+                <li style="color: red;">Geen extra ingrediënten gevonden</li>      
+        
+        <?php
             }
         ?>
              
                 <li><h3>Ingrediënten verwijderen</h3></li>
        
         <?php
-            foreach($ingredientList as $ingredient) {  //print list of ingredients to remove
+            if(isset($ingredientList) && $ingredientList != null) {
+                foreach($ingredientList as $ingredient) {  //print list of ingredients to remove
         ?>
                 
                 <li>
@@ -78,6 +106,14 @@
                 </li>
                 
         <?php    
+                }
+            }
+            else {
+        ?>
+                
+                <li style="color: red;">Geen basis ingrediënten gevonden</li>      
+        
+        <?php
             }
         ?>
         
