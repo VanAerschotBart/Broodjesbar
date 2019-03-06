@@ -18,16 +18,19 @@ class ItemsDAO {
             foreach($stmt as $row) {
                 $item = entities\Items::create(
                     $row['id'],
-                    $row['naam'],
-                    $row['omschrijving'],
-                    $row['prijs']
+                    $row['name'],
+                    $row['description'],
+                    $row['price']
                 );
                 array_push($list, $item);
             }
+            
+            $dbh = null;
+            return $list;
         }
-        
-        $dbh = null;
-        return $list;
+        else {
+            $dbh = null;
+        }
         
     }
     
@@ -44,10 +47,13 @@ class ItemsDAO {
             foreach($stmt as $id) {
                 array_push($list, $id);
             }
+            
+            $dbh = null;
+            return $list;
         }
-        
-        $dbh = null;
-        return $list;
+        else {
+            $dbh = null;
+        }
         
     }
     
@@ -61,14 +67,16 @@ class ItemsDAO {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $item = entities\Items::create(
                 $row['id'],
-                $row['naam'],
-                $row['omschrijving'],
-                $row['prijs']
+                $row['name'],
+                $row['description'],
+                $row['price']
             );
+            $dbh = null;
+            return $list;
         }
-        
-        $dbh = null;
-        return $item;
+        else {
+            $dbh = null;
+        }
          
     }
 

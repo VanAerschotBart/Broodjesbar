@@ -55,7 +55,9 @@
                 <th>Prijs (€)</th>
             </tr>
         <?php
-        foreach($list as $value) {  //building the list
+        if(isset($list) && $list != null) {
+            
+            foreach($list as $value) {  //building the list
         ?>
             <tr>
                 <td><?php print($value->getName()); ?></td>
@@ -85,7 +87,18 @@
             </tr>
             
         <?php
-        }  //end of list building
+                
+            }  //end of list building
+        }
+        else {
+        ?>
+            
+            <tr>
+                <td colspan="3" style="color: red;">Geen lijst gevonden</td>
+            </tr>
+            
+        <?php
+        }
         ?>
             
         </table>
