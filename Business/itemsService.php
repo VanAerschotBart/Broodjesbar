@@ -16,4 +16,10 @@ class ItemsService {
         return $answer;
     }
     
+    public function getById($id) {
+        $itemsDAO = new ItemsDAO();
+        $answer = $itemsDAO->getById($id);
+        return $answer;
+    }
+    
 }

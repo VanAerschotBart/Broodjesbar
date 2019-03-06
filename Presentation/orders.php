@@ -14,9 +14,9 @@
         <h2>Te bestellen</h2>
         <table>     <!-- description of the item -->
             <tr>
-                <td><?php print($item->getName()); ?></td>
-                <td><?php print($item->getDescription()); ?></td>
-                <td><?php print($item->getPrice()); ?></td>
+                <td style="border: 1px solid black;"><?php print($item->getName()); ?></td>
+                <td style="border: 1px solid black; padding: 0% 5%;"><?php print($item->getDescription()); ?></td>
+                <td style="border: 1px solid black;"><?php print($item->getPrice()); ?></td>
             </tr>
         </table>
         <form action="basket.php" method="POST">
@@ -39,7 +39,7 @@
                 <li><h3>Toppings</h3></li>
                 
         <?php
-            foreach($toppingsList as $topping) {  //print list of toppings
+            foreach($toppingList as $topping) {  //print list of toppings
         ?>
                 
                 <li>
@@ -54,7 +54,7 @@
                 <li><h3>Ingrediënten toevoegen</h3></li>
        
         <?php
-            foreach($ingredientsList as $ingredient) {  //print list of ingredients to add
+            foreach($ingredientList as $ingredient) {  //print list of ingredients to add
         ?>
                 
                 <li>
@@ -69,7 +69,7 @@
                 <li><h3>Ingrediënten verwijderen</h3></li>
        
         <?php
-            foreach($ingredientsList as $ingredient) {  //print list of ingredients to remove
+            foreach($ingredientList as $ingredient) {  //print list of ingredients to remove
         ?>
                 
                 <li>
@@ -118,7 +118,7 @@
         <?php
         }
         
-        if($orderList != null) {  //check for existing orders
+        if(isset($orderList) && $orderList != null) {  //check for existing orders
         ?>
         
         <h2>Reeds geplaatste bestellingen</h2>

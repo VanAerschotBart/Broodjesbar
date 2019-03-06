@@ -2,6 +2,7 @@
 
 require_once("business/itemsService.php");
 require_once("business/ordersService.php");
+require_once("business/extraService.php");
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -15,18 +16,15 @@ if (isset($_SESSION["userId"])) {
             $id = $_GET["id"];
             $itemsSvc = new ItemsService();
             $item = $itemsSvc->getById($id);
-            print_r($item);
                 
             if($item != null) {  //check for a valid broodjesId, if correct, load options
                 
                 $active = true;
                 
-                $sauceSvc = new SauceService();
-                $sauceList = $sauceSvc->getAll();
-                $toppingsSvc = new ToppingService();
-                $toppingsList = $toppingSvc->getAll();
-                $ingredientsSvc = new IngredientService();
-                $ingredientsList = $ingredientSvc->getById($id);
+                $extraSvc = new ExtraService();
+                $ingredientList = $extraSvc->getIngredients();
+                $toppingList = $extraSvc->getToppings();
+                $sauceList = $extraSvc->getSauces();
                 
                 include("presentation/orders.php");
                 

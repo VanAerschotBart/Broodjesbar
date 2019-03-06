@@ -1,8 +1,6 @@
 <?php  //basket.php FRITUUR
 
-require_once("business/sauceService.php");
-require_once("business/toppingsService.php");
-require_once("business/ingredientsService.php");
+require_once("business/extraService.php");
 
 if(isset($_POST["create"])) {
     
@@ -10,6 +8,7 @@ if(isset($_POST["create"])) {
     if(!isset($_SESSION["lines"])) {
         $_SESSION["lines"] = array();
         $_SESSION["lineId"] = 0;
+        $lineId = $_SESSION["lineId"];
     }
     else {  //updating lineId session var and setting the lineId on lines session array
         $lineId = $_SESSION["lineId"] +1;
@@ -35,8 +34,8 @@ if(isset($_POST["create"])) {
      //first we check if selected, if selected the id goes into its array, if the array isn't empty, the array is placed in the session
     
     //collecting the desired (extra) sauces
-    $sauceSvc = new SauceService();
-    $sauceIdList = $sauceSvc->getIds();
+    $extraSvc = new ExtraService();
+    $sauceIdList = $extraSvc->getSauceIds();
     $sauceArr = array();
                 
     foreach($sauceIdList as $id) {
@@ -54,11 +53,11 @@ if(isset($_POST["create"])) {
     }
             
     //collecting the desired (extra) toppings
-    $toppingsSvc = new ToppingsService();
-    $toppingsIdList = $toppingsSvc->getIds();
+    $extraSvc = new ExtraService();
+    $toppingIdList = $extraSvc->getToppingIds();
     $toppingsArr = array();
             
-    foreach($toppingsIdList as $id) {
+    foreach($toppingIdList as $id) {
         $text = "topping";
         $text .= $id;
                 
@@ -72,12 +71,12 @@ if(isset($_POST["create"])) {
     }
             
     //collecting the desired ingredients to be added
-    $ingredientsSvc = new IngredientsService();
-    $ingredientsIdList = $ingredientsSvc->getIds();
+    $extraSvc = new ExtraService();
+    $ingredientIdList = $extraSvc->getIngredientIds();
     $addIngredientsArr = array();
     $removeIngredientsArr = array();
         
-    foreach($ingredientsIdList as $id) {
+    foreach($ingredientIdList as $id) {
         $text = "addIngredient";
         $text .= $id;
         
@@ -92,7 +91,7 @@ if(isset($_POST["create"])) {
     }
         
     //collecting the desired ingredients to be left out
-    foreach($ingredientsIdList as $id) {
+    foreach($ingredientIdList as $id) {
         $text = "removeIngredient";
         $text .= $id;
                 

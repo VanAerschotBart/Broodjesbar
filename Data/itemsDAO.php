@@ -27,7 +27,6 @@ class ItemsDAO {
         }
         
         $dbh = null;
-        
         return $list;
         
     }
@@ -48,7 +47,6 @@ class ItemsDAO {
         }
         
         $dbh = null;
-        
         return $list;
         
     }
@@ -60,16 +58,16 @@ class ItemsDAO {
         $stmt->execute([':id' => $id]);
         
         if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $item = entities\Items::create(
-                $stmt['id'],
-                $stmt['naam'],
-                $stmt['omschrijving'],
-                $stmt['prijs']
+                $row['id'],
+                $row['naam'],
+                $row['omschrijving'],
+                $row['prijs']
             );
         }
         
         $dbh = null;
-        
         return $item;
          
     }
