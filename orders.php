@@ -19,8 +19,8 @@ if (isset($_SESSION["userId"])) {
                 
             if($item != null) {  //check for a valid broodjesId, if correct, load options
                 
+                $_SESSION["itemId"] = $itemId;
                 $active = true;
-                
                 $extraSvc = new ExtraService();
                 $ingredientList = $extraSvc->getIngredients();
                 $toppingList = $extraSvc->getToppings();

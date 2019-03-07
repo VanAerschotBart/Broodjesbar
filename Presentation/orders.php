@@ -120,7 +120,7 @@
         ?>
         
             <tr>
-                <td><?php print($item->getName()); ?></td><td><?php print($line->getAmount()); ?></td><td><?php print($item->getPrice()); ?></td>
+                <td><?php print($item->getName()); ?></td><td><?php print($line->getAmount()); ?></td><td><?php $price = $item->getPrice() * $line->getAmount(); print($price); ?></td>
             </tr>
             
         <?php

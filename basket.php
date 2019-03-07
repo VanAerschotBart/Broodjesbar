@@ -3,6 +3,10 @@
 require_once("business/extraService.php");
 require_once("business/linesService.php");
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 if(isset($_POST["amount"])) {
                 
     //making sure the amount is within limits
@@ -16,10 +20,12 @@ if(isset($_POST["amount"])) {
         $amount = $_POST["amount"];
     }
     
-    //creating a session array for storen all lines before comitting the order
+    //creating a session array for storing all lines before comitting the order
     if(!isset($_SESSION["lines"])) {
         $_SESSION["lines"] = array();
     }
+    
+    $itemId = $_SESSION["itemId"];
     
     //creating a line
     $line = entities\Lines::create(
