@@ -29,7 +29,7 @@ if(isset($_POST["create"])) {
     else{
         $amount = $_POST["amount"];
     }
-    array_push($_SESSION["lines"][$lineId]["amount"], $amount);
+    //array_push($_SESSION["lines"][$lineId]["amount"], $amount);
     
      //first we check if selected, if selected the id goes into its array, if the array isn't empty, the array is placed in the session
     

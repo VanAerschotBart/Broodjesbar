@@ -24,7 +24,7 @@
                 <li><h3>Sauzen</h3></li>
             
         <?php
-            if(isset($ingredientList) && $ingredientList != null) {
+            if(isset($sauceList)) {
                 foreach($sauceList as $sauce) {  //print list of sauces
         ?>
                 
@@ -48,7 +48,7 @@
                 <li><h3>Toppings</h3></li>
                 
         <?php
-            if(isset($ingredientList) && $ingredientList != null) {
+            if(isset($toppingList)) {
                 foreach($toppingList as $topping) {  //print list of toppings
         ?>
                 
@@ -96,7 +96,7 @@
                 <li><h3>Ingrediënten verwijderen</h3></li>
        
         <?php
-            if(isset($ingredientList) && $ingredientList != null) {
+            if(isset($ingredientList)) {
                 foreach($ingredientList as $ingredient) {  //print list of ingredients to remove
         ?>
                 
@@ -154,7 +154,7 @@
         <?php
         }
         
-        if(isset($orderList) && $orderList != null) {  //check for existing orders
+        if(isset($orderList)) {  //check for existing orders
         ?>
         
         <h2>Reeds geplaatste bestellingen</h2>

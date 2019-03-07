@@ -127,13 +127,8 @@ class ExtraDAO {
             
             $ingredientIdList = array();
 
-            foreach($stmt as $row) {
-                $ingredientId = entities\Extra::create(
-                    $row['id'],
-                    $row['name'],
-                    $row['type']
-                );
-                array_push($ingredientIdList, $ingredientId);
+            foreach($stmt as $ingredientId) {
+                array_push($ingredientIdList, $ingredientId['id']);
             }
             $dbh = null;
             return $ingredientIdList;
@@ -153,15 +148,10 @@ class ExtraDAO {
         
         if ($stmt->rowCount() > 0) {
             
-            $list = array();
+            $sauceIdList = array();
 
-            foreach($stmt as $row) {
-                $list = entities\Extra::create(
-                    $row['id'],
-                    $row['name'],
-                    $row['type']
-                );
-                array_push($sauceIdList, $sauceId);
+            foreach($stmt as $sauceId) {
+                array_push($sauceIdList, $sauceId['id']);
             }
             $dbh = null;
             return $sauceIdList;
@@ -183,13 +173,8 @@ class ExtraDAO {
             
             $ToppingIdList = array();
 
-            foreach($stmt as $row) {
-                $toppingId = entities\Extra::create(
-                    $row['id'],
-                    $row['name'],
-                    $row['type']
-                );
-                array_push($ToppingIdList, $toppingId);
+            foreach($stmt as $toppingId) {
+                array_push($ToppingIdList, $toppingId['id']);
             }
             $dbh = null;
             return $ToppingIdList;
