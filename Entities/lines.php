@@ -21,6 +21,10 @@ class Lines {
         return $line;
     }
     
+    public function setId($id) {
+        $this->id = $id;
+    }
+    
     public function getId() {
         $id = $this->id;
         return $id;
