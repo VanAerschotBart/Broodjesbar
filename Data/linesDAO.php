@@ -33,10 +33,9 @@ class LinesDAO {
 
             $line = entities\Lines::create(
                 $row['id'],
-                $row['itemId'],
                 $row['orderId'],
-                //$row['sidenote'],
-                $row['status']
+                $row['itemId'],
+                $row['amount']
             );
             $dbh = null;
             return $orderlines;

@@ -8,7 +8,7 @@
         <h1>Bestellingen</h1>
         
          <?php
-        if ($active === true) {  //check for an active order
+        if (isset($active) && $active === true) {  //check for an active order
         ?>
         
         <h2>Te bestellen</h2>
@@ -68,30 +68,6 @@
         <?php
             }
         ?>
-                
-                <li><h3>Ingrediënten toevoegen</h3></li>
-       
-        <?php
-            if(isset($ingredientList) && $ingredientList != null) {
-                foreach($ingredientList as $ingredient) {  //print list of ingredients to add
-        ?>
-                
-                <li>
-                    <input type="checkbox" name="addIngredient<?php print($ingredient->getId()); ?>">
-                    <?php print($ingredient->getName()); ?>
-                </li>
-                
-        <?php    
-                }
-            }
-            else {
-        ?>
-                
-                <li style="color: red;">Geen extra ingrediënten gevonden</li>      
-        
-        <?php
-            }
-        ?>
              
                 <li><h3>Ingrediënten verwijderen</h3></li>
        
@@ -118,7 +94,6 @@
         ?>
         
             </ul>
-            <input type="hidden" name="create">
             <input type="number" name="amount" value="1" required><br>
             <input type="submit" value="In winkelmandje plaatsen">
             <input type="reset" value="Reset">
@@ -126,7 +101,8 @@
             
         <?php    
         }
-        elseif(isset($_SESSION["lines"])) {
+        
+        if(isset($_SESSION["lines"])) {
         ?>
         
         <h2>Winkelmandje</h2>
@@ -137,12 +113,14 @@
             
         <?php
             $rows = count($_SESSION["lines"]);
+            $itemSvc = new ItemsService();
             
             foreach($_SESSION["lines"] as $line) {
+                $item = $itemSvc->getById($line->getItemId());
         ?>
         
             <tr>
-                <td><?php print($line->getItemId()); ?></td><td><?php print($line->getAmount()); ?></td><?php //print($linePrice); ?>
+                <td><?php print($item->getName()); ?></td><td><?php print($line->getAmount()); ?></td><td><?php print($item->getPrice()); ?></td>
             </tr>
             
         <?php

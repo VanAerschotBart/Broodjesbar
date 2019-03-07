@@ -9,15 +9,15 @@ class Lines {
     private $orderId;
     private $amount;
     
-    public function __construct($id, $itemId, $orderId, $amount) {
+    public function __construct($id, $orderId, $itemId, $amount) {
         $this->id = $id;
-        $this->itemId = $itemId;
         $this->orderId = $orderId;
+        $this->itemId = $itemId;
         $this->amount = $amount;
     }
     
-    public static function create($id, $itemId, $orderId, $amount) {
-        $line = new Lines($id, $itemId, $orderId, $amount);
+    public static function create($id, $orderId, $itemId, $amount) {
+        $line = new Lines($id, $orderId, $itemId, $amount);
         return $line;
     }
     

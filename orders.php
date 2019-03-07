@@ -10,7 +10,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (isset($_SESSION["userId"])) {
     
-    if($_SESSION["employee"] == 0) {
+    if($_SESSION["employee"] == 0) {  //customer handling
         
         if(isset($_GET["id"])) {  //retrieving the correct item by id
             $itemId = $_GET["id"];
@@ -21,26 +21,10 @@ if (isset($_SESSION["userId"])) {
                 
                 $active = true;
                 
-                $line = entities\Lines::create(
-                    null,
-                    $itemId,
-                    null,
-                    //sidenote,
-                    0
-                );
-                
-                if(!isset($_SESSION["lines"])) {
-                    $_SESSION["lines"] = array();
-                }
-                
-                array_push($_SESSION["lines"], $line);
-                
                 $extraSvc = new ExtraService();
                 $ingredientList = $extraSvc->getIngredients();
                 $toppingList = $extraSvc->getToppings();
                 $sauceList = $extraSvc->getSauces();
-                
-                include("presentation/orders.php");
                 
             }
             else {
@@ -48,5 +32,12 @@ if (isset($_SESSION["userId"])) {
             }
             
         }
+        
+        include("presentation/orders.php");
+        
+    }
+    else{  //employee handler
+        
+        include("presentation/orders.php");
     }
 }

@@ -1,14 +1,12 @@
 <?php  //basket.php FRITUUR
 
 require_once("business/extraService.php");
+require_once("business/linesService.php");
 
-if(isset($_POST["create"])) {
+if(isset($_POST["amount"])) {
                 
-    //making sure the amount is set and within limits
-    if(!isset($_POST["amount"])) {
-        $amount = 1;
-    }
-    elseif($_POST["amount"]<0) {
+    //making sure the amount is within limits
+    if($_POST["amount"]<0) {
         $amount = 1;
     }
     elseif($_POST["amount"]>50) {
@@ -17,6 +15,22 @@ if(isset($_POST["create"])) {
     else{
         $amount = $_POST["amount"];
     }
+    
+    //creating a session array for storen all lines before comitting the order
+    if(!isset($_SESSION["lines"])) {
+        $_SESSION["lines"] = array();
+    }
+    
+    //creating a line
+    $line = entities\Lines::create(
+        null,
+        null,
+        $itemId,
+        $amount
+    );
+    
+    //putting the line in the session array
+    array_push($_SESSION["lines"], $line);
     
     $extraSvc = new ExtraService();
     
@@ -45,6 +59,7 @@ if(isset($_POST["create"])) {
         if(isset($_POST[$text])) {
             array_push($toppingsArr, $id);
         }
+        
     }
             
     //collecting the desired ingredients to be left out
@@ -61,16 +76,11 @@ if(isset($_POST["create"])) {
                 
     }
     
-}
-elseif(isset($_POST["adjust"])) {
-    
-    
-    
-}
-elseif(isset($_GET["delete"])) {
-    
+    header("location: orders.php");
+    exit(0);
     
 }
 else {
-    
+    header("location: amountNotSet.php");
+    exit(0);
 }
