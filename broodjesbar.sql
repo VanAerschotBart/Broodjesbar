@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 21 feb 2019 om 16:00
+-- Gegenereerd op: 15 mrt 2019 om 09:02
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.3.0
 
@@ -25,21 +25,59 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `broodjes`
+-- Tabelstructuur voor tabel `extra`
 --
 
-CREATE TABLE `broodjes` (
-  `ID` int(11) NOT NULL,
-  `Naam` varchar(50) NOT NULL,
-  `Omschrijving` varchar(500) NOT NULL,
-  `Prijs` decimal(10,2) NOT NULL
+CREATE TABLE `extra` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `broodjes`
+-- Gegevens worden geëxporteerd voor tabel `extra`
 --
 
-INSERT INTO `broodjes` (`ID`, `Naam`, `Omschrijving`, `Prijs`) VALUES
+INSERT INTO `extra` (`id`, `name`, `type`) VALUES
+(1, 'sla', 1),
+(2, 'tomaat', 1),
+(3, 'komkommer', 1),
+(4, 'ajuin', 1),
+(5, 'ei', 1),
+(6, 'wortel', 1),
+(7, 'mayonaise', 2),
+(8, 'zoete mayonaise', 2),
+(9, 'tomatenketchup', 2),
+(10, 'curryketchup', 2),
+(11, 'andalouse', 2),
+(12, 'samourai', 2),
+(13, 'joppie-saus', 2),
+(14, 'tartaar', 2),
+(15, 'bicky-sauzen', 2),
+(16, 'jonge kaas', 3),
+(17, 'smeltkaas', 3),
+(18, 'bacon', 3),
+(19, 'augurk', 3),
+(20, 'bicky-uitjes', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `items`
+--
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `items`
+--
+
+INSERT INTO `items` (`id`, `name`, `description`, `price`) VALUES
 (1, 'Kaas', 'Broodje met jonge kaas', '1.90'),
 (2, 'Ham', 'Broodje met natuurham', '1.90'),
 (3, 'Kaas en ham', 'Broodje met kaas en ham', '2.10'),
@@ -55,22 +93,15 @@ INSERT INTO `broodjes` (`ID`, `Naam`, `Omschrijving`, `Prijs`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `linez`
+-- Tabelstructuur voor tabel `orderlines`
 --
 
-CREATE TABLE `linez` (
-  `broodjesId` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `orderId` int(11) NOT NULL
+CREATE TABLE `orderlines` (
+  `id` int(11) NOT NULL,
+  `orderId` int(11) NOT NULL,
+  `itemId` int(11) NOT NULL,
+  `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `linez`
---
-
-INSERT INTO `linez` (`broodjesId`, `amount`, `orderId`) VALUES
-(1, 1, 6),
-(1, 10, 13);
 
 -- --------------------------------------------------------
 
@@ -80,32 +111,10 @@ INSERT INTO `linez` (`broodjesId`, `amount`, `orderId`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `UserId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
   `placed` datetime NOT NULL,
-  `extra` text NOT NULL,
   `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `orders`
---
-
-INSERT INTO `orders` (`id`, `UserId`, `placed`, `extra`, `status`) VALUES
-(1, 13, '2019-02-21 15:47:38', 'extra', 1),
-(2, 13, '2019-02-21 15:47:40', 'extra', 1),
-(3, 13, '2019-02-21 15:47:49', 'extra', 0),
-(4, 13, '2019-02-21 15:49:51', 'extra', 0),
-(5, 13, '2019-02-21 15:50:15', 'extra', 0),
-(6, 13, '2019-02-21 15:52:22', '', 0),
-(7, 13, '2019-02-21 15:55:39', 'yeah', 0),
-(8, 13, '2019-02-21 15:56:10', '', 0),
-(9, 13, '2019-02-21 15:56:24', '', 0),
-(10, 13, '2019-02-21 15:57:50', '', 0),
-(11, 13, '2019-02-21 15:58:16', '', 0),
-(12, 13, '2019-02-21 15:58:58', '', 0),
-(13, 13, '2019-02-21 15:59:17', '', 0),
-(14, 13, '2019-02-21 15:59:39', '', 0),
-(15, 13, '2019-02-21 16:00:03', '', 0);
 
 -- --------------------------------------------------------
 
@@ -135,22 +144,31 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `employee`) VALUES
 --
 
 --
--- Indexen voor tabel `broodjes`
+-- Indexen voor tabel `extra`
 --
-ALTER TABLE `broodjes`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `extra`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `linez`
+-- Indexen voor tabel `items`
 --
-ALTER TABLE `linez`
-  ADD KEY `orderId` (`orderId`);
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `orderlines`
+--
+ALTER TABLE `orderlines`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orderId` (`orderId`),
+  ADD KEY `itemId` (`itemId`);
 
 --
 -- Indexen voor tabel `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`);
 
 --
 -- Indexen voor tabel `users`
@@ -163,16 +181,28 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT voor een tabel `broodjes`
+-- AUTO_INCREMENT voor een tabel `extra`
 --
-ALTER TABLE `broodjes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `extra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT voor een tabel `items`
+--
+ALTER TABLE `items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `orderlines`
+--
+ALTER TABLE `orderlines`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT voor een tabel `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
@@ -185,10 +215,17 @@ ALTER TABLE `users`
 --
 
 --
--- Beperkingen voor tabel `linez`
+-- Beperkingen voor tabel `orderlines`
 --
-ALTER TABLE `linez`
-  ADD CONSTRAINT `linez_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `orders` (`id`);
+ALTER TABLE `orderlines`
+  ADD CONSTRAINT `orderlines_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `orderlines_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `items` (`ID`);
+
+--
+-- Beperkingen voor tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
