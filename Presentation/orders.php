@@ -108,7 +108,7 @@
         <h2>Winkelmandje</h2>
         <table>
             <tr>
-                <td>Naam</td><td>Aantal</td><td>Prijs</td>
+                <td><h3>Naam</h3></td><td><h3>Aantal</h3></td><td><h3>Prijs</h3></td>
             </tr>
             
         <?php
@@ -128,6 +128,7 @@
         ?>
             
         </table>
+        <a href="">Afrekenen</a>
         
         <?php
         }
@@ -168,7 +169,7 @@
             print("<h1 style='color: red; text-decoration: underline;'>Er staan momenteel geen bestellingen open.</h1>");
         }
         ?>
-            
+        <a href="list.php">Verder Winkelen</a>    
     </body>
 </html>
         
