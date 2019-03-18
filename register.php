@@ -11,11 +11,6 @@ if(isset($_SESSION["errorText"])) {
     unset($_SESSION["errorText"]);
 }
 
-if(isset($_SESSION["id"])) {
-        header("Location: list.php");
-        exit(0);    
-}
-
 if(isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password1"]) && isset($_POST["password2"])) {
     $name = $_POST["name"];
     $email = $_POST["email"];
@@ -41,6 +36,12 @@ if(isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password1"])
            if($answer == null) {  //so no answer is good this time, let's start
             
                if($password1 == $password2){  //check if the user is capable of typing the same thing twice
+                   
+                   //destroy the existing session and start up a new one
+                   session_destroy();
+                   session_start();
+                   
+                   //creating an account and inserting it into the DB
                    $hash = password_hash($password1, PASSWORD_DEFAULT);
                    $account = entities\Account::create(
                        null, 
@@ -51,13 +52,13 @@ if(isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["password1"])
                    );
                    $accSvc = new Accountservice();
                    $addedAccount = $accSvc->setNewUser($account);
-                   $id = $addedAccount->getId();
-                   $_SESSION["employee"] = 0;
-                   $_SESSION["userId"] = $id;
-                   $_SESSION["name"] = $name;
-                   $_SESSION["email"] = $email;
+                   
+                   //putting the created account in a session
+                   $_SESSION["user"] = $account;
+                   
+                   //installing a cookie with the email adress (for use on the next login)
                    $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;  //I need these parameters to make localhost store the cookie, otherwise they act like a session, remembered but gone as soon as the browser closes
-                        setcookie("user", $email, time()+60*60*24*365, '/', $domain, false);
+                   setcookie("user", $email, time()+60*60*24*365, '/', $domain, false);
                    header("Location: list.php");
                    exit(0);
                }

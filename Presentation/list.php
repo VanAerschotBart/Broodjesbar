@@ -8,7 +8,7 @@
         <h1>Lijst</h1>
         
         <?php
-        if(!isset($_SESSION["employee"])) {//if not logged in, build a log in and a link to register for unregistered user  
+        if(!isset($_SESSION["user"])) {//if not logged in, build a log in and a link to register for unregistered user  
         ?>    
         
         <form action='login.php' method='POST'>
@@ -39,6 +39,7 @@
         <?php
         }
         else {  //logged in user, so build links to log out or go to their order(s)
+            $user = $_SESSION["user"];
         ?>
         
         <a href="logout.php">Afmelden</a><br>
@@ -65,27 +66,29 @@
                 <td><?php print($value->getPrice()); ?></td>
         
         <?php
-            if(isset($_SESSION["employee"]) && $_SESSION["employee"] == 1) {  //if the logged in user is an employee, 2 links are created for deleting or adjusting a sandwich
+                if(isset($user)) {
+               
+                if($user->getEmployee() == 1) {  //if the logged in user is an employee, 2 links are created for deleting or adjusting a sandwich
         ?>
                   
                 <td>
-                    <a href="adjust.php?id=<?php print($value->getId()); ?>">Aanpassen</a> |
+                    <a href="adjust.php?id=<?php print($value->getId()); ?>">Aanpassen</a>
                     <a href="delete.php?id=<?php print($value->getId()); ?>">Verwijderen</a>
                 </td>
                 
         <?php
-            }
-            elseif(isset($_SESSION["employee"]) && $_SESSION["employee"] == 0) {  //if costumer, an input field for the disered amount is added
+                    }
+                    elseif($user->getEmployee() == 0) {  //if costumer, an input field for the disered amount is added
         ?>
                 <td>  
                     <a href="orders.php?id=<?php print($value->getId()); ?>"><button>Bestellen</button></a>
                 </td>
             
         <?php
-            }
+                    }
+                }
         ?>
             </tr>
-            
         <?php
                 
             }  //end of list building

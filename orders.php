@@ -8,9 +8,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if (isset($_SESSION["userId"])) {
+if (isset($_SESSION["user"])) {
     
-    if($_SESSION["employee"] == 0) {  //customer handling
+    $user = $_SESSION["user"];
+    
+    if($user->getEmployee() == 0) {  //customer handling
         
         if(isset($_GET["id"])) {  //retrieving the correct item by id
             $itemId = $_GET["id"];
@@ -40,4 +42,8 @@ if (isset($_SESSION["userId"])) {
         
         include("presentation/orders.php");
     }
+}
+else {
+    header("Location: list.php");
+    exit(0);
 }
