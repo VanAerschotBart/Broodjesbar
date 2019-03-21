@@ -26,8 +26,8 @@ class Lines {
         
     }
     
-    public static function create($id, $orderId, $itemId, $amount) {
-        $line = new Lines($id, $orderId, $itemId, $amount);
+    public static function create($id, $orderId, $itemId, $amount, $extraArray) {
+        $line = new Lines($id, $orderId, $itemId, $amount, $extraArray);
         return $line;
     }
     

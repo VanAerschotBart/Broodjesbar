@@ -40,19 +40,11 @@ if(isset($_POST["amount"])) {
     
     $itemId = $_SESSION["itemId"];
     
-    //creating a line
-    $line = entities\Lines::create(
-        null,
-        null,
-        $itemId,
-        $amount
-    );
-    
     //putting the line in the session array
     array_push($_SESSION["lines"], $line);
     
     $extraSvc = new ExtraService();
-    $specificationArr = array();
+    $extraArray = array();
     
     //collecting the desired extra sauces
     $sauceIdList = $extraSvc->getSauceIds();
@@ -62,7 +54,7 @@ if(isset($_POST["amount"])) {
         $text .= $id;
                     
         if(isset($_POST[$text])) {
-            array_push($specificationArr, $id);
+            array_push($extraArray, $id);
         }
                     
     }
@@ -75,7 +67,7 @@ if(isset($_POST["amount"])) {
         $text .= $id;
                 
         if(isset($_POST[$text])) {
-            array_push($specificationArr, $id);
+            array_push($extraArray, $id);
         }
         
     }
@@ -88,10 +80,19 @@ if(isset($_POST["amount"])) {
         $text .= $id;
                 
         if(isset($_POST[$text])) {
-            array_push($specificationArr, $id);
+            array_push($extraArray, $id);
         }
                 
     }
+    
+    //creating a line
+    $line = entities\Lines::create(
+        null,
+        null,
+        $itemId,
+        $amount,
+        $extraArray
+    );
     
     header("location: orders.php");
     exit(0);
