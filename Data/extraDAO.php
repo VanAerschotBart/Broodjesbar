@@ -1,4 +1,4 @@
-<?php  //data/DAO.php FRITUUR
+<?php  //data/extraDAO.php FRITUUR
 
 require_once("DBconfig.php");
 require_once("entities/extra.php");

@@ -29,7 +29,7 @@
         ?>
                 
                 <li>
-                    <input type="checkbox" name="sauce<?php print($sauce->getId()); ?>">
+                    <input type="checkbox" name="extra<?php print($sauce->getId()); ?>">
                     <?php print($sauce->getName()); ?>
                 </li>
                 
@@ -53,7 +53,7 @@
         ?>
                 
                 <li>
-                    <input type="checkbox" name="topping<?php print($topping->getId()); ?>">
+                    <input type="checkbox" name="extra<?php print($topping->getId()); ?>">
                     <?php print($topping->getName()); ?>
                 </li>
                 
@@ -77,7 +77,7 @@
         ?>
                 
                 <li>
-                    <input type="checkbox" name="removeIngredient<?php print($ingredient->getId()); ?>">
+                    <input type="checkbox" name="extra<?php print($ingredient->getId()); ?>">
                     <?php print($ingredient->getName()); ?>
                 </li>
                 
@@ -128,7 +128,7 @@
         ?>
             
         </table>
-        <a href="">Afrekenen</a>
+        <a href="placer.php">Afrekenen</a>
         
         <?php
         }

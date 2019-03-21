@@ -8,17 +8,30 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 if(isset($_POST["amount"])) {
-                
-    //making sure the amount is within limits
-    if($_POST["amount"]<0) {
-        $amount = 1;
+    
+    $amount = $_POST["amount"];
+    
+    if(is_numeric($amount)) {  //numeric check
+        
+        $amount = ltrim($amount, "0");  //removing all zeros at the beginning
+         
+        //making sure the amount is within limits
+        if($amount<0) {
+            $amount = 1;
+        }
+        elseif($amount>50) {
+            $amount = 50;
+        }
+        else{
+            $amount = round($amount);  //making sure the integer is not decimal
+        }
+         
     }
-    elseif($_POST["amount"]>50) {
-        $amount = 50;
-    }
-    else{
-        $amount = $_POST["amount"];
-    }
+    else {
+        $_SESSION["errorText"] = "<h1 style='color: red;'>Alleen getallen!</h1>";
+        header("Location: orders.php?id=" . $_SESSION["itemId"]);
+        exit(0);
+    } 
     
     //creating a session array for storing all lines before comitting the order
     if(!isset($_SESSION["lines"])) {
@@ -39,45 +52,43 @@ if(isset($_POST["amount"])) {
     array_push($_SESSION["lines"], $line);
     
     $extraSvc = new ExtraService();
+    $specificationArr = array();
     
     //collecting the desired extra sauces
     $sauceIdList = $extraSvc->getSauceIds();
-    $sauceArr = array();
                 
     foreach($sauceIdList as $id) {
-        $text = "sauce";
+        $text = "extra";
         $text .= $id;
                     
         if(isset($_POST[$text])) {
-            array_push($sauceArr, $id);
+            array_push($specificationArr, $id);
         }
                     
     }
             
     //collecting the desired extra toppings
     $toppingIdList = $extraSvc->getToppingIds();
-    $toppingsArr = array();
             
     foreach($toppingIdList as $id) {
-        $text = "topping";
+        $text = "extra";
         $text .= $id;
                 
         if(isset($_POST[$text])) {
-            array_push($toppingsArr, $id);
+            array_push($specificationArr, $id);
         }
         
     }
             
     //collecting the desired ingredients to be left out
     $ingredientIdList = $extraSvc->getIngredientIds();
-    $IngredientsArr = array();
         
     foreach($ingredientIdList as $id) {
-        $text = "removeIngredient";
+        $text = "extra";
         $text .= $id;
                 
         if(isset($_POST[$text])) {
-            array_push($removeIngredientsArr, $id);
+            array_push($specificationArr, $id);
         }
                 
     }
@@ -87,6 +98,7 @@ if(isset($_POST["amount"])) {
     
 }
 else {
-    header("location: amountNotSet.php");
+    $_SESSION["errorText"] = "<h1 style='color: red;'>Geen aantal ingegeven!</h1>";
+    header("Location: orders.php?id=" . $_SESSION["itemId"]);
     exit(0);
 }

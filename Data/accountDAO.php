@@ -19,9 +19,7 @@ class AccountDAO {
 
         $accountId = $dbh->lastInsertId();
         $account->setId($accountId);
-        
         $dbh = null;
-        
         return $account;
     }
     
@@ -33,9 +31,7 @@ class AccountDAO {
         $stmt->execute([':email' => $email]);
         
         if ($stmt->rowCount() > 0) {
-            
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
             $account = entities\Account::create(
                 $row['id'],
                 $row['name'],
@@ -43,12 +39,12 @@ class AccountDAO {
                 $row['password'],
                 $row['employee']
             );
+            $dbh = null;
+            return $account;
         }
-        
-        $dbh = null;
-        
-        return $account;
-        
+        else {
+            $dbh = null;
+        }
     }
 
 }

@@ -9,6 +9,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+if(isset($_SESSION["errorText"])) {
+    print($_SESSION["errorText"]);
+    unset($_SESSION["errorText"]);
+}
+
 if (isset($_SESSION["user"])) {
     
     $user = $_SESSION["user"];
