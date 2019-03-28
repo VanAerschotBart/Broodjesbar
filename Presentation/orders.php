@@ -112,18 +112,20 @@
             </tr>
             
         <?php
-            $rows = count($_SESSION["lines"]);
             $itemSvc = new ItemsService();
             
-            foreach($_SESSION["lines"] as $line) {
-                $item = $itemSvc->getById($line->getItemId());
+            if(isset($_SESSION["lines"])) {
+                
+                foreach($_SESSION["lines"] as $line) {
+                    $item = $itemSvc->getById($line->getItemId());
         ?>
         
             <tr>
-                <td><?php print($item->getName()); ?></td><td><?php print($line->getAmount()); ?></td><td><?php $price = $item->getPrice() * $line->getAmount(); print($price); ?></td>
+                <td><?php print($item->getName()); ?></td><td style="text-align: center;"><?php print($line->getAmount()); ?></td><td style="text-align: right;"><?php $price = $item->getPrice() * $line->getAmount(); print($price); ?></td>
             </tr>
             
         <?php
+                }
             }
         ?>
             

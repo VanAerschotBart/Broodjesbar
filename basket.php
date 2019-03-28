@@ -40,6 +40,14 @@ if(isset($_POST["amount"])) {
     
     $itemId = $_SESSION["itemId"];
     
+    //creating a line
+    $line = entities\Lines::create(
+        null,
+        null,
+        $itemId,
+        $amount
+    );
+    
     //putting the line in the session array
     array_push($_SESSION["lines"], $line);
     
@@ -84,15 +92,6 @@ if(isset($_POST["amount"])) {
         }
                 
     }
-    
-    //creating a line
-    $line = entities\Lines::create(
-        null,
-        null,
-        $itemId,
-        $amount,
-        $extraArray
-    );
     
     header("location: orders.php");
     exit(0);

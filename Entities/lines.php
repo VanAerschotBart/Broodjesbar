@@ -8,26 +8,16 @@ class Lines {
     private $itemId;
     private $orderId;
     private $amount;
-    private $specifications = array();
     
-    public function __construct($id, $orderId, $itemId, $amount, $extraArray) {
+    public function __construct($id, $orderId, $itemId, $amount) {
         $this->id = $id;
         $this->orderId = $orderId;
         $this->itemId = $itemId;
         $this->amount = $amount;
-        
-        if ($extraArray != null) {
-            
-            foreach ($extraArray as $extra) {
-                array_push($specifications);
-            }
-            
-        }
-        
     }
     
-    public static function create($id, $orderId, $itemId, $amount, $extraArray) {
-        $line = new Lines($id, $orderId, $itemId, $amount, $extraArray);
+    public static function create($id, $orderId, $itemId, $amount) {
+        $line = new Lines($id, $orderId, $itemId, $amount);
         return $line;
     }
     
