@@ -38,7 +38,7 @@
             
         <?php
         }
-        else {  //logged in user, so build links to log out or go to their order(s)
+        else {  //logged in user, so build links to log out or go to their order
             $user = $_SESSION["user"];
         ?>
         

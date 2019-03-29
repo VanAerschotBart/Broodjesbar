@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if(isset($_POST["amount"])) {
+if(isset($_POST["amount"])) {  //only required input from user
     
     $amount = $_POST["amount"];
     
@@ -51,46 +51,29 @@ if(isset($_POST["amount"])) {
     //putting the line in the session array
     array_push($_SESSION["lines"], $line);
     
+    $_SESSION["extras"] = array();
+    
     $extraSvc = new ExtraService();
     $extraArray = array();
     
-    //collecting the desired extra sauces
-    $sauceIdList = $extraSvc->getSauceIds();
-                
-    foreach($sauceIdList as $id) {
-        $text = "extra";
-        $text .= $id;
-                    
-        if(isset($_POST[$text])) {
-            array_push($extraArray, $id);
-        }
-                    
-    }
-            
-    //collecting the desired extra toppings
-    $toppingIdList = $extraSvc->getToppingIds();
-            
-    foreach($toppingIdList as $id) {
-        $text = "extra";
-        $text .= $id;
-                
-        if(isset($_POST[$text])) {
-            array_push($extraArray, $id);
-        }
+    //collecting the desired extras
+    $idList = $extraSvc->getAllIds();
+    
+    foreach($idList as $id) {
+        $text = "extra" . $id;
         
-    }
+        if(isset($_POST[$text])) {  //was the checkbox checked or not?
             
-    //collecting the desired ingredients to be left out
-    $ingredientIdList = $extraSvc->getIngredientIds();
-        
-    foreach($ingredientIdList as $id) {
-        $text = "extra";
-        $text .= $id;
-                
-        if(isset($_POST[$text])) {
-            array_push($extraArray, $id);
+            $extra = $extraSvc->getById($id);
+            
+            if($extra != null) {  //if null, there was an invalid id given
+                array_push($extraArray, $extra);
+            }
+            
         }
-                
+    
+        array_push($_SESSION["extras"], $extraArray);
+                    
     }
     
     header("location: orders.php");

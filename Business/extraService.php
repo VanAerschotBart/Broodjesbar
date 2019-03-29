@@ -10,6 +10,13 @@ class ExtraService {
         return $answer;
     }
     
+    public function getById($id) {
+        $extraDAO = new ExtraDAO();
+        $answer = $extraDAO->getById($id);
+        return $answer;
+    }
+    
+    
     public function getIngredients(){
         $extraDAO = new ExtraDAO();
         $answer = $extraDAO->getIngredients();
@@ -25,6 +32,12 @@ class ExtraService {
     public function getToppings(){
         $extraDAO = new ExtraDAO();
         $answer = $extraDAO->getToppings();
+        return $answer;
+    }
+    
+    public function getAllIds() {
+        $extraDAO = new ExtraDAO();
+        $answer = $extraDAO->getAllIds();
         return $answer;
     }
     
@@ -45,5 +58,5 @@ class ExtraService {
         $answer = $extraDAO->getToppingIds();
         return $answer;
     }
-    
+
 }

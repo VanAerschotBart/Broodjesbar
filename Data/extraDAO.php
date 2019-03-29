@@ -33,6 +33,30 @@ class ExtraDAO {
         
     }
     
+    public function getById($id) {
+        $sql = "SELECT * FROM extra where id = :id";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        
+        if ($stmt->rowCount() > 0) {
+            
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $extra = entities\Extra::create(
+                $row['id'],
+                $row['name'],
+                $row['type']
+            );
+            $dbh = null;
+            return $extra;
+            
+        }
+        else {
+            $dbh = null;
+        }
+        
+    }
+    
     public function getIngredients() {
         $sql = "SELECT * FROM extra WHERE type = 1";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
@@ -117,6 +141,29 @@ class ExtraDAO {
         
     }
     
+    public function getAllIds() {
+        $sql = "SELECT id FROM extra";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() > 0) {
+            
+            $IdList = array();
+
+            foreach($stmt as $id) {
+                array_push($IdList, $id['id']);
+            }
+            $dbh = null;
+            return $IdList;
+            
+        }
+        else {
+            $dbh = null;
+        }
+        
+    }
+    
     public function getIngredientIds() {
         $sql = "SELECT id FROM extra WHERE type = 1";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
@@ -128,7 +175,7 @@ class ExtraDAO {
             $ingredientIdList = array();
 
             foreach($stmt as $ingredientId) {
-                array_push($ingredientIdList, $ingredientId['id']);
+                array_push($ingredientIdList, $ingredientId);
             }
             $dbh = null;
             return $ingredientIdList;
@@ -151,7 +198,7 @@ class ExtraDAO {
             $sauceIdList = array();
 
             foreach($stmt as $sauceId) {
-                array_push($sauceIdList, $sauceId['id']);
+                array_push($sauceIdList, $sauceId);
             }
             $dbh = null;
             return $sauceIdList;
@@ -171,13 +218,13 @@ class ExtraDAO {
         
         if ($stmt->rowCount() > 0) {
             
-            $ToppingIdList = array();
+            $toppingIdList = array();
 
             foreach($stmt as $toppingId) {
-                array_push($ToppingIdList, $toppingId['id']);
+                array_push($toppingIdList, $toppingId);
             }
             $dbh = null;
-            return $ToppingIdList;
+            return $toppingIdList;
             
         }
         else {
