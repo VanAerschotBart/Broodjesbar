@@ -72,7 +72,7 @@ if(isset($_POST["amount"])) {  //only required input from user
             null,
             $_SESSION["itemId"];,
             $amount
-            //$_SESSION["extras"]  //
+            $_SESSION["extras"]  //
         );
         unset($_SESSION["itemId"]);
         unset($_SESSION["extras"]);
@@ -86,7 +86,7 @@ if(isset($_POST["amount"])) {  //only required input from user
             null,
             $_SESSION["itemId"];,
             $amount
-            //null
+            null
         );
         unset($_SESSION["itemId"]);
         array_push($_SESSION["lines"], $line); 

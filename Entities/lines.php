@@ -8,16 +8,18 @@ class Lines {
     private $itemId;
     private $orderId;
     private $amount;
+    private $extraIdArray = array();
     
-    public function __construct($id, $orderId, $itemId, $amount) {
+    public function __construct($id, $orderId, $itemId, $amount, $extraIdArray) {
         $this->id = $id;
         $this->orderId = $orderId;
         $this->itemId = $itemId;
         $this->amount = $amount;
+        $this->extraIdArray = $extraIdArray;
     }
     
-    public static function create($id, $orderId, $itemId, $amount) {
-        $line = new Lines($id, $orderId, $itemId, $amount);
+    public static function create($id, $orderId, $itemId, $amount, $extraIdArray) {
+        $line = new Lines($id, $orderId, $itemId, $amount, $extraIdArray);
         return $line;
     }
     
@@ -43,6 +45,11 @@ class Lines {
     public function getAmount() {
         $amount = $this->amount;
         return $amount;
+    }
+    
+    public function getExtraIdArray() {
+        $extraIdArray = $this->extraIdArray;
+        return $extraIdArray;
     }
     
 }

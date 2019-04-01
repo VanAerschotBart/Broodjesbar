@@ -6,10 +6,10 @@ require_once("entities/lines.php");
 class LinesDAO {
     
     public function setNewLines($lines) {
-        $sql = "INSERT INTO orderlines (itemId, orderId, amount) VALUES ";
+        $sql = "INSERT INTO orderlines (orderId, itemId, amount) VALUES ";
         
         foreach($lines as $line) {
-            $sql .= "(" . $line->getBroodjesId() . ", " . $line->getOrderId() . ", " . $line->getAmount() . " ), ";
+            $sql .= "(" . $line->getOrdersId() . ", " . $line->getBroodjesId() . ", " . $line->getAmount() . " ), ";
         }
         
         $sql = rtrim($sql, ', ');
@@ -17,6 +17,8 @@ class LinesDAO {
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         $dbh = null;
+        
+        
     }
     
     public function getLinesByOrderId($orderId) {
