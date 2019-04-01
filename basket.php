@@ -38,19 +38,6 @@ if(isset($_POST["amount"])) {  //only required input from user
         $_SESSION["lines"] = array();
     }
     
-    $itemId = $_SESSION["itemId"];
-    
-    //creating a line
-    $line = entities\Lines::create(
-        null,
-        null,
-        $itemId,
-        $amount
-    );
-    
-    //putting the line in the session array
-    array_push($_SESSION["lines"], $line);
-    
     //collecting the desired extras
     $extraSvc = new ExtraService();
     $idList = $extraSvc->getAllIds();
@@ -62,26 +49,46 @@ if(isset($_POST["amount"])) {  //only required input from user
             
             $extra = $extraSvc->getById($id);
             
-            if($extra != null) {  //if null, there was an invalid id given
+            if($extra != null) {  //if not null, there was a valid id given
                 
                 if(!isset($_SESSION["extras"])) {  //creating a session array if not already set
                     $_SESSION["extras"] = array();
                 }
                 
-                if(!isset($extraIdArray)) {  //creating an array for the id(s) if not already set
-                    $extraIdArray = array();
-                }
-                
-                array_push($extraIdArray, $extra->getId());  //adding the id to the array
+                array_push($_SESSION["extras"], $extra->getId());  //adding the id to the array
                 
             }
             
         }
-    
-        if(isset($_SESSION["extras"])){  //if the session array exists
-            array_push($_SESSION["extras"], $extraArray);
-        }
                     
+    }
+    
+    if(isset($_SESSION["extras"])){  //differentiate between a line with or without specifications
+        
+        $line = entities\Lines::create(
+            null,
+            null,
+            $_SESSION["itemId"];,
+            $amount
+            //$_SESSION["extras"]  //
+        );
+        unset($_SESSION["itemId"]);
+        unset($_SESSION["extras"]);
+        array_push($_SESSION["lines"], $line);
+        
+    }
+    else {
+        
+        $line = entities\Lines::create(
+            null,
+            null,
+            $_SESSION["itemId"];,
+            $amount
+            //null
+        );
+        unset($_SESSION["itemId"]);
+        array_push($_SESSION["lines"], $line); 
+        
     }
     
     header("location: orders.php");

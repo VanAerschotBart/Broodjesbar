@@ -37,7 +37,7 @@ if (isset($_SESSION["user"])) {
             }
             else {
                 $_SESSION["errorText"] = "<h1 style='color: red;'>Onbekend broodjesId!</h1>";
-        header("Location: orders.php?id=" . $_SESSION["itemId"]);
+        header("Location: orders.php");
         exit(0);
             }
             
