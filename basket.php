@@ -33,7 +33,7 @@ if(isset($_POST["amount"])) {  //only required input from user
         exit(0);
     } 
     
-    //creating a session array for storing all lines before comitting the order
+    //creating a session array for storing all lines if not already set
     if(!isset($_SESSION["lines"])) {
         $_SESSION["lines"] = array();
     }
@@ -51,12 +51,8 @@ if(isset($_POST["amount"])) {  //only required input from user
     //putting the line in the session array
     array_push($_SESSION["lines"], $line);
     
-    $_SESSION["extras"] = array();
-    
-    $extraSvc = new ExtraService();
-    $extraArray = array();
-    
     //collecting the desired extras
+    $extraSvc = new ExtraService();
     $idList = $extraSvc->getAllIds();
     
     foreach($idList as $id) {
@@ -67,12 +63,24 @@ if(isset($_POST["amount"])) {  //only required input from user
             $extra = $extraSvc->getById($id);
             
             if($extra != null) {  //if null, there was an invalid id given
-                array_push($extraArray, $extra);
+                
+                if(!isset($_SESSION["extras"])) {  //creating a session array if not already set
+                    $_SESSION["extras"] = array();
+                }
+                
+                if(!isset($extraIdArray)) {  //creating an array for the id(s) if not already set
+                    $extraIdArray = array();
+                }
+                
+                array_push($extraIdArray, $extra->getId());  //adding the id to the array
+                
             }
             
         }
     
-        array_push($_SESSION["extras"], $extraArray);
+        if(isset($_SESSION["extras"])){  //if the session array exists
+            array_push($_SESSION["extras"], $extraArray);
+        }
                     
     }
     
