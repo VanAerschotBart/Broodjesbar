@@ -63,6 +63,8 @@ if(isset($_POST["amount"])) {  //only required input from user
                     
     }
     
+    
+    //creating a line and adding it to the session array
     if(isset($_SESSION["extras"])){  //differentiate between a line with or without specifications
         
         $line = entities\Lines::create(
