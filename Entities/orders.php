@@ -8,22 +8,22 @@ class Orders {
     private $userId;
     private $placed;
     private $pickup;
-    private $extra;
+    private $extraNote;
     private $status;
     private $orderLines = array();  //only used for basket!
     
-    public function __construct($id, $userId, $placed, $pickup, $extra, $status, $orderLines) {
+    public function __construct($id, $userId, $placed, $pickup, $extraNote, $status, $orderLines) {
         $this->id = $id;
         $this->userId = $userId; 
         $this->placed = $placed;
         $this->pickup = $pickup;
-        $this->extra = $extra;
+        $this->extraNote = $extraNote;
         $this->status =  $status;
         $this->orderLines = $orderLines;
     }
     
-    public static function create($id, $userId, $placed, $pickup, $extra, $status, $orderLines) {
-        $order = new Orders($id, $userId, $placed, $pickup, $extra, $status, $orderLines);
+    public static function create($id, $userId, $placed, $pickup, $extraNote, $status, $orderLines) {
+        $order = new Orders($id, $userId, $placed, $pickup, $extraNote, $status, $orderLines);
         return $order;
     }
     
@@ -51,9 +51,9 @@ class Orders {
         return $pickup;
     }
     
-    public function getExtra() {
-        $extra = $this->extra;
-        return $extra;
+    public function getExtraNote() {
+        $extraNote = $this->extraNote;
+        return $extraNote;
     }
     
     public function getStatus() {

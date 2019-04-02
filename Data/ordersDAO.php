@@ -14,7 +14,7 @@ class OrdersDAO {
             ':userId' => $order->getUserId(),
             ':placed' => $order->getPlaced(),
             ':pickup' => $order->getPickup(),
-            ':extra' => $order->getExtra(),
+            ':extraNote' => $order->getExtraNote(),
             ':status' => $order->getStatus()
         ]);
         
@@ -38,7 +38,7 @@ class OrdersDAO {
                 $row['userId'],
                 $row['placed'],
                 $row["pickup"],
-                $row['extra'],
+                $row['extraNote'],
                 $row['status'],
                 null  //orderLines(array) -> only used for basket
             );
@@ -69,7 +69,7 @@ class OrdersDAO {
                     $row['userId'],
                     $row['placed'],
                     $row["pickup"],
-                    $row['extra'],
+                    $row['extraNote'],
                     $row['status'],
                     null  //orderLines(array) -> only used for basket
                 );
@@ -103,7 +103,7 @@ class OrdersDAO {
                     $row['userId'],
                     $row['placed'],
                     $row["pickup"],
-                    $row['extra'],
+                    $row['extraNote'],
                     $row['status'],
                     null  //orderLines(array) -> only used for basket
                 );

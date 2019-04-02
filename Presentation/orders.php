@@ -48,7 +48,20 @@
             
         </table>
         <form action="placer.php" method="POST">
-            <textarea name="extra"></textarea>
+            <textarea name="extraNote"></textarea><br>
+            <select>
+                
+            <?php
+                for($i=0; $i<5; $i++) {
+            ?> 
+                
+                <option><?php print($dateTime); ?></option>
+                
+            <?php
+                }
+            ?>
+                
+            </select>
             <input type="submit" value="Bestellen">
         </form>
         <h2>Reeds geplaatste bestellingen</h2>
