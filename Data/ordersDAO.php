@@ -7,22 +7,18 @@ class OrdersDAO {
 
     public function setNewOrder($order) {
         
-        $sql = "INSERT INTO orders (userId, placed, extra, status) VALUES (:userId, :placed, :extra, :status)";
+        $sql = "INSERT INTO orders (userId, placed, pickup, extra, status) VALUES (:userId, :placed, :extra, :status)";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute([
             ':userId' => $order->getUserId(),
             ':placed' => $order->getPlaced(),
+            ':pickup' => $order->getPickup(),
             ':extra' => $order->getExtra(),
             ':status' => $order->getStatus()
         ]);
         
-        $orderId = $dbh->lastInsertId();
-        $order->setId($orderId);
-        
         $dbh = null;
-        
-        return $order;
         
     }
 
@@ -41,14 +37,19 @@ class OrdersDAO {
                 $row['id'],
                 $row['userId'],
                 $row['placed'],
+                $row["pickup"],
                 $row['extra'],
-                $row['status']
+                $row['status'],
+                null  //orderLines(array) -> only used for basket
             );
+            
+            $dbh = null;
+            return $list;
+            
         }
-        
-        $dbh = null;
-        
-        return $order;
+        else {
+            $dbh = null;
+        }
         
     }
 
@@ -67,16 +68,22 @@ class OrdersDAO {
                     $row['id'],
                     $row['userId'],
                     $row['placed'],
+                    $row["pickup"],
                     $row['extra'],
-                    $row['status']
+                    $row['status'],
+                    null  //orderLines(array) -> only used for basket
                 );
                 array_push($list, $order);
+                
             }
+            
+            $dbh = null;
+            return $list;
+            
         }
-        
-        $dbh = null;
-        
-        return $list;
+        else {
+            $dbh = null;
+        }
         
     }
     
@@ -95,15 +102,20 @@ class OrdersDAO {
                     $row['id'],
                     $row['userId'],
                     $row['placed'],
+                    $row["pickup"],
                     $row['extra'],
                     $row['status']
                 );
                 array_push($list, $order);
+                
             }
+            
+            $dbh = null;
+            return $list;
+            
+        }
+        else {
+            $dbh = null;
         }
         
-        $dbh = null;
-        
-        return $list;
-    }
 }

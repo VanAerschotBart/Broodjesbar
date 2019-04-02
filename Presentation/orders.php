@@ -145,6 +145,7 @@
             
         </table>
         <a href="placer.php">Afrekenen</a>
+        <h2>Reeds geplaatste bestellingen</h2>
         
         <?php
         }
@@ -152,12 +153,12 @@
         if(isset($orderList)) {  //check for existing orders
         ?>
         
-        <h2>Reeds geplaatste bestellingen</h2>
         <table>   
             <tr>
                 <th>BestellingsId</th>
                 <th>GebruikersId</th>
-                <th>Bestelling geplaats op:</th>
+                <th>Bestellingstijdstip</th>
+                <th>Afhaaltijdstip</th>
                 <th>Opmerking</th>
                 <th>Status</th>
             </tr>
@@ -169,6 +170,7 @@
                     <td><?php print($value->getId()); ?></td>
                     <td><?php print($value->getUserId()); ?></td>
                     <td><?php print($value->getPlaced()); ?></td>
+                    <td><?php print($value->getPickup()); ?></td>
                     <td><?php print($value->getExtra()); ?></td>
                     <td><?php print($value->getStatus()); ?></td>
                 </tr>
@@ -182,7 +184,7 @@
         <?php
         }
         else {
-            print("<h1 style='color: red; text-decoration: underline;'>Er staan momenteel geen bestellingen open.</h1>");
+            print("<h3 style='color: red; text-decoration: underline;'>Er staan momenteel geen bestellingen open.</h3>");
         }
         ?>
         <a href="list.php">Verder Winkelen</a>    
