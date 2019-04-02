@@ -81,7 +81,8 @@
                     elseif($user->getEmployee() == 0) {  //if costumer, an input field for the disered amount is added
         ?>
                 <td>  
-                    <a href="orders.php?id=<?php print($value->getId()); ?>"><button>Bestellen</button></a>
+                    <a href="specification.php?id=<?php print($value->getId()); ?>">            <button>Bestellen</button>
+                    </a>
                 </td>
             
         <?php

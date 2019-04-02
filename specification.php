@@ -1,4 +1,4 @@
-<?php  //orders.php FRITUUR
+<?php  //specification.php FRITUUR
 
 require_once("business/itemsService.php");
 require_once("business/linesService.php");
@@ -37,13 +37,16 @@ if (isset($_SESSION["user"])) {
             }
             else {
                 $_SESSION["errorText"] = "<h1 style='color: red;'>Onbekend broodjesId!</h1>";
-                header("Location: specifications.php");
+                header("Location: list.php");
                 exit(0);
             }
             
+            include("presentation/specification.php");
+            
         }
         
-        include("presentation/orders.php");
+        header("Location: list.php");
+        exit(0);
         
     }
     else{  //employee handler
