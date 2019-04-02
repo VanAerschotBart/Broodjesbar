@@ -6,10 +6,10 @@ require_once("entities/lines.php");
 class LinesDAO {
     
     public function setNewLines($lines) {
-        $sql = "INSERT INTO orderlines (orderId, itemId, amount) VALUES ";
+        $sql = "INSERT INTO orderlines (orderId, itemId, note, amount) VALUES ";
         
         foreach($lines as $line) {
-            $sql .= "(" . $line->getOrdersId() . ", " . $line->getBroodjesId() . ", " . $line->getAmount() . " ), ";
+            $sql .= "(" . $line->getOrderId() . ", " . $line->getItemId() . ", " . $line->getNote() . ", " . $line->getAmount() . " ), ";
         }
         
         $sql = rtrim($sql, ', ');
@@ -30,24 +30,26 @@ class LinesDAO {
         
         if ($stmt->rowCount() > 0) {
             
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $orderlines = array();
+            
+            foreach($stmt as $row) {
 
-            $line = entities\Lines::create(
-                $row['id'],
-                $row['orderId'],
-                $row['itemId'],
-                $row['amount']
-            );
+                $line = entities\Lines::create(
+                    $row['id'],
+                    $row['orderId'],
+                    $row['itemId'],
+                    $row['note'],
+                    $row['amount']
+                );
+                array_push($orderlines, $item);
+            }
+            
             $dbh = null;
             return $orderlines;
         }
         else {
             $dbh = null;
         }
-        
-        $dbh = null;
-        return $orderlines;
         
     }
     

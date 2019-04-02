@@ -94,7 +94,10 @@
         ?>
         
             </ul>
-            <input type="number" name="amount" value="1" required><br>
+            <h4 style="text-decoration: underline;">Opmerking:</h4>
+            <textarea type="text" name="note"></textarea>
+            <h4 style="text-decoration: underline;">Aantal</h4>
+            <input type="number" name="amount" value="1" required>
             <input type="submit" value="In winkelmandje plaatsen">
             <input type="reset" value="Reset">
         </form>
@@ -121,7 +124,15 @@
         ?>
         
             <tr>
-                <td><?php print($item->getName()); ?></td><td style="text-align: center;"><?php print($line->getAmount()); ?></td><td style="text-align: right;"><?php $price = $item->getPrice() * $line->getAmount(); print($price); ?></td>
+                <td>
+                    <?php print($item->getName()); ?>
+                </td>
+                <td style="text-align: center;">
+                    <?php print($line->getAmount()); ?>
+                </td>
+                <td style="text-align: right;">
+                    <?php $price = $item->getPrice() * $line->getAmount(); print($price); ?>
+                </td>
             </tr>
             
         <?php

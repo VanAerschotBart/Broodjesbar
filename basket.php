@@ -70,9 +70,9 @@ if(isset($_POST["amount"])) {  //only required input from user
         $line = entities\Lines::create(
             null,
             null,
-            $_SESSION["itemId"];,
-            $amount
-            $_SESSION["extras"]  //
+            $_SESSION["itemId"],
+            $amount,
+            $_SESSION["extras"]
         );
         unset($_SESSION["itemId"]);
         unset($_SESSION["extras"]);
@@ -84,8 +84,8 @@ if(isset($_POST["amount"])) {  //only required input from user
         $line = entities\Lines::create(
             null,
             null,
-            $_SESSION["itemId"];,
-            $amount
+            $_SESSION["itemId"],
+            $amount,
             null
         );
         unset($_SESSION["itemId"]);

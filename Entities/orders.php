@@ -7,19 +7,22 @@ class Orders {
     private $id;
     private $userId;
     private $placed;
+    //private $pickup;  //TO DO
     private $extra;
     private $status;
+    private $orderLines = array();
     
-    public function __construct($id, $userId, $placed, $extra, $status) {
+    public function __construct($id, $userId, $placed, $extra, $status, $orderLines) {
         $this->id = $id;
         $this->userId = $userId; 
         $this->placed = $placed;
         $this->extra = $extra;
         $this->status =  $status;
+        $this->orderLines = $orderLines;
     }
     
-    public static function create($id, $userId, $placed, $extra, $status) {
-        $order = new Orders($id, $userId, $placed, $extra, $status);
+    public static function create($id, $userId, $placed, $extra, $status, $orderLines) {
+        $order = new Orders($id, $userId, $placed, $extra, $status, $orderLines);
         return $order;
     }
     
@@ -50,6 +53,11 @@ class Orders {
     public function getStatus() {
         $status = $this->status;
         return $status;
+    }
+    
+    public function getOrderLines() {
+        $orderLines = $this->orderLines;
+        return $orderLines;
     }
     
 }
