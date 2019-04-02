@@ -111,7 +111,7 @@
         <h2>Winkelmandje</h2>
         <table>
             <tr>
-                <td><h3>Naam</h3></td><td><h3>Aantal</h3></td><td><h3>Prijs</h3></td>
+                <td><h3>Naam</h3></td><td><h3>Aantal</h3></td><td><h3>Prijs</h3></td><td><h3>Opmerking</h3></td>
             </tr>
             
         <?php
@@ -132,6 +132,9 @@
                 </td>
                 <td style="text-align: right;">
                     <?php $price = $item->getPrice() * $line->getAmount(); print($price); ?>
+                </td>
+                <td style="text-align: right;">
+                    <?php print($line->getNote()); ?>
                 </td>
             </tr>
             

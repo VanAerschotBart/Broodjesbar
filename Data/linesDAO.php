@@ -39,7 +39,8 @@ class LinesDAO {
                     $row['orderId'],
                     $row['itemId'],
                     $row['note'],
-                    $row['amount']
+                    $row['amount'],
+                    null  //extraIdArray -> only used for basket
                 );
                 array_push($orderlines, $item);
             }

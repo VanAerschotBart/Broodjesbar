@@ -31,7 +31,15 @@ if(isset($_POST["amount"])) {  //only required input from user
         $_SESSION["errorText"] = "<h1 style='color: red;'>Alleen getallen!</h1>";
         header("Location: orders.php?id=" . $_SESSION["itemId"]);
         exit(0);
-    } 
+    }
+    
+    //getting the sidenote, if no sidenote given, an empty string will be passed on  
+    if(isset($_POST["note"])) {
+        $note = htmlspecialchars($_POST["note"]);
+    }
+    else {
+        $note= "";
+    }
     
     //creating a session array for storing all lines if not already set
     if(!isset($_SESSION["lines"])) {
@@ -71,6 +79,7 @@ if(isset($_POST["amount"])) {  //only required input from user
             null,
             null,
             $_SESSION["itemId"],
+            $note,
             $amount,
             $_SESSION["extras"]
         );
@@ -85,6 +94,7 @@ if(isset($_POST["amount"])) {  //only required input from user
             null,
             null,
             $_SESSION["itemId"],
+            $note,
             $amount,
             null
         );

@@ -5,23 +5,23 @@ namespace entities;
 class Lines {
     
     private $id;
-    private $itemId;
     private $orderId;
+    private $itemId;
     private $note;
     private $amount;
-    private $extraIdArray = array();
+    private $extraIdArray = array();  //only used for basket!
     
-    public function __construct($id, $orderId, $note, $itemId, $amount, $extraIdArray) {
+    public function __construct($id, $orderId, $itemId, $note, $amount, $extraIdArray) {
         $this->id = $id;
         $this->orderId = $orderId;
-        $this->note = $note;
         $this->itemId = $itemId;
+        $this->note = $note;
         $this->amount = $amount;
         $this->extraIdArray = $extraIdArray;
     }
     
-    public static function create($id, $orderId, $note, $itemId, $amount, $extraIdArray) {
-        $line = new Lines($id, $orderId, $note, $itemId, $amount, $extraIdArray);
+    public static function create($id, $orderId, $itemId, $note, $amount, $extraIdArray) {
+        $line = new Lines($id, $orderId, $itemId, $note, $amount, $extraIdArray);
         return $line;
     }
     
@@ -39,14 +39,15 @@ class Lines {
         return $itemId;
     }
     
-    public function getNote() {
-        $note = $this->note;
-        return $note;
-    }
-    
     public function getOrderId() {
         $orderId = $this->orderId;
         return $orderId;
+    }
+    
+    
+    public function getNote() {
+        $note = $this->note;
+        return $note;
     }
     
     public function getAmount() {
