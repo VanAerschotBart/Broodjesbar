@@ -104,7 +104,8 @@ class OrdersDAO {
                     $row['placed'],
                     $row["pickup"],
                     $row['extra'],
-                    $row['status']
+                    $row['status'],
+                    null  //orderLines(array) -> only used for basket
                 );
                 array_push($list, $order);
                 
