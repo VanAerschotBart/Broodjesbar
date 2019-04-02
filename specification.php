@@ -44,9 +44,10 @@ if (isset($_SESSION["user"])) {
             include("presentation/specification.php");
             
         }
-        
-        header("Location: list.php");
-        exit(0);
+        else {
+            header("Location: list.php");
+            exit(0);
+        }
         
     }
     else{  //employee handler
