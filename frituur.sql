@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 15 mrt 2019 om 09:02
+-- Gegenereerd op: 02 apr 2019 om 14:38
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.3.0
 
@@ -100,6 +100,7 @@ CREATE TABLE `orderlines` (
   `id` int(11) NOT NULL,
   `orderId` int(11) NOT NULL,
   `itemId` int(11) NOT NULL,
+  `note` text NOT NULL,
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -137,7 +138,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `employee`) VALUES
 (1, 'Bart', 'vanaerschotb@hotmail.com', '$2y$10$xBn/9eN6jh0NNBxDwTHrCONr.aPz9dP4BHGmK6JNA75H7uk.ekzXy', 1),
 (13, 'Jos', 'iets@wat.hier', '$2y$10$rk4qzNtXIGjHLvU/.6Z92ehZSYuklNZiZf/5bqmLv4PoElZfvq2Xy', 0),
-(15, 'Paul', 'gebruikersnaam@domainnaam.landcode', '$2y$10$hV6dsGsK285QZvHWgoy5/eTs0BhX951wTxCeGxmRYV816GNHSxzdO', 0);
+(15, 'Paul', 'gebruikersnaam@domainnaam.landcode', '$2y$10$hV6dsGsK285QZvHWgoy5/eTs0BhX951wTxCeGxmRYV816GNHSxzdO', 0),
+(16, 'jo', 'jo@dikke.homo', '$2y$10$c.c7wm8nnYuQFiqs59ljquEMvUyP9IDUtb6unmM76k/Te705p5PEW', 0);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -190,7 +192,7 @@ ALTER TABLE `extra`
 -- AUTO_INCREMENT voor een tabel `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT voor een tabel `orderlines`
@@ -208,7 +210,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
@@ -219,7 +221,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `orderlines`
   ADD CONSTRAINT `orderlines_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `orders` (`id`),
-  ADD CONSTRAINT `orderlines_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `items` (`ID`);
+  ADD CONSTRAINT `orderlines_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `items` (`id`);
 
 --
 -- Beperkingen voor tabel `orders`
