@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 02 apr 2019 om 14:38
+-- Gegenereerd op: 02 apr 2019 om 15:05
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.3.0
 
@@ -114,6 +114,8 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `placed` datetime NOT NULL,
+  `pickup` time NOT NULL,
+  `extra` text NOT NULL,
   `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
