@@ -52,10 +52,10 @@
             <select>
                 
             <?php
-                for($i=0; $i<5; $i++) {
+                for($i=20; $i<50; $i+=5) {
             ?> 
                 
-                <option><?php print($dateTime); ?></option>
+                <option><?php print(date('H:i', strtotime(" + " . $i . " minutes"))); ?></option>
                 
             <?php
                 }

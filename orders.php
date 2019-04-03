@@ -18,16 +18,11 @@ if (isset($_SESSION["user"])) {
     
     $user = $_SESSION["user"];
     
-    //to select pickup time in presentation
-    $date = date('H:i');
-    $dateTime = new DateTime();
-    $dateTime->setTimestamp($date);
-    
     if($user->getEmployee() == 0) {
-        
+        //$orderList maken (persoonlijk)
     }
     else{
-        
+        //$orderList maken (alle)
     }
     
     include("presentation/orders.php");
