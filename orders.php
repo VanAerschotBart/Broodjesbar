@@ -20,6 +20,21 @@ if (isset($_SESSION["user"])) {
     
     if($user->getEmployee() == 0) {
         //$orderList maken (persoonlijk)
+        //timestamp for pickup
+        list($hour, $minute) = explode(":", date("H:i"));
+        
+        if($minute != 0 || $minute != 5) {  //rounding the minutes up
+            
+            //TO DO: laatste char van $minute afzonderen!
+            if($minute < 5) {
+                $minute = 5;
+            }
+            else{
+                $minute = 0;
+            }
+            
+        }
+        
     }
     else{
         //$orderList maken (alle)

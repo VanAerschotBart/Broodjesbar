@@ -55,7 +55,7 @@
                 for($i=20; $i<50; $i+=5) {
             ?> 
                 
-                <option><?php print(date('H:i', strtotime(" + " . $i . " minutes"))); ?></option>
+                <option><?php print($hour . ":" . strval($minute + $i)); ?></option>
                 
             <?php
                 }
