@@ -55,7 +55,7 @@
                 for($i=20; $i<50; $i+=5) {
             ?> 
                 
-                <option><?php print($hour . ":" . strval($minute + $i)); ?></option>
+                <option>Tijdstip<?php //ON HOLD print($hour . ":" . strval($minute + $i)); ?></option>
                 
             <?php
                 }

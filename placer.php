@@ -23,7 +23,7 @@ if (isset($_SESSION["user"])) {
         
         if(isset($_SESSION["lines"])) {  //
             
-            if(isset($_POST['extraNote']) {
+            if(isset($_POST['extraNote'])) {
                 $extraNote = $_POST['extraNote']
             } 
             else {
@@ -35,7 +35,7 @@ if (isset($_SESSION["user"])) {
                 null,
                 $user->getId(),
                 $placed,
-                $pickup,  //TO DO
+                null,  //$pickup->ON HOLD
                 $extraNote,
                 0,
                 $_SESSION["lines"]
@@ -52,12 +52,12 @@ if (isset($_SESSION["user"])) {
                 
                 
             }
-            else {
-                $_SESSION["errorText"] = "<h1 style='color: red;'>Geen lijnen gevonden om in bestelling te plaatsen</h1>";
-                header("Location: orders.php");
-                exit(0);
-            }
             
+        }
+        else {
+            $_SESSION["errorText"] = "<h1 style='color: red;'>Geen lijnen gevonden om in bestelling te plaatsen</h1>";
+            header("Location: orders.php");
+            exit(0);
         }
         
         include("presentation/orders.php");
