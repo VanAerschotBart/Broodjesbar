@@ -42,17 +42,6 @@ if (isset($_SESSION["user"])) {
             )
             $orderSvc = new OrderService();
             
-            
-            foreach($_SESSION["lines"]) {
-                
-            }
-                
-            if($item != null) {  //
-                
-                
-                
-            }
-            
         }
         else {
             $_SESSION["errorText"] = "<h1 style='color: red;'>Geen lijnen gevonden om in bestelling te plaatsen</h1>";
