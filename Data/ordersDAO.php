@@ -8,7 +8,7 @@ class OrdersDAO {
 
     public function setNewOrder($order) {
         
-        $sql = "INSERT INTO orders (userId, placed, pickup, extra, status) VALUES (:userId, :placed, :extra, :status)";
+        $sql = "INSERT INTO orders (userId, placed, pickup, extraNote, status) VALUES (:userId, :placed, :pickup, :extra, :status)";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute([
@@ -18,11 +18,11 @@ class OrdersDAO {
             ':extraNote' => $order->getExtraNote(),
             ':status' => $order->getStatus()
         ]);
-        $linesSvc = new LinesService();
+        //$linesSvc = new LinesService();
         
-        foreach($order->getOrderlines() as $orderLine) {
+        /*foreach($order->getOrderlines() as $orderLine) {
             $linesSvc->setNewLine($OrderLine);
-        }
+        }*/
         
         $dbh = null;
         

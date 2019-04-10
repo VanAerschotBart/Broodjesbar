@@ -1,13 +1,13 @@
 <?php  //business/ordersService.php FRITUUR
 
 require_once("data/ordersDAO.php");
+require_once("data/linesDAO.php");
 
 class OrderService {
     
     public function setNewOrder($order) {
         $ordersDAO = new OrdersDAO();
-        $order = $ordersDAO->setNewOrder($order);
-        return $order;
+        $ordersDAO->setNewOrder($order);
     }
     
     public function getAllOrders() {
@@ -29,9 +29,8 @@ class OrderService {
     }
     
     public function setNewLines($lines) {
-        $orderDAO = new OrderDAO();
-        $order = $orderDAO->setNewLines($lines);
-        return $order;
+        $linesDAO = new LinesDAO();
+        $linesDAO->setNewLines($lines);
     }
     
 }

@@ -37,10 +37,11 @@ if (isset($_SESSION["user"])) {
                 $placed,
                 $_POST["pickup"],
                 $extraNote,
-                0,
-                $_SESSION["lines"]
+                0
+                //$_SESSION["lines"]
             );
             $orderSvc = new OrderService();
+            $orderSvc->setNewOrder($order);
             
         }
         else {

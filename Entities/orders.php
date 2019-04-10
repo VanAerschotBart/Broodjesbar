@@ -10,20 +10,20 @@ class Orders {
     private $pickup;
     private $extraNote;
     private $status;
-    private $orderLines = array();  //only used for basket!
+    //private $orderLines = array();  //only used for basket!
     
-    public function __construct($id, $userId, $placed, $pickup, $extraNote, $status, $orderLines) {
+    public function __construct($id, $userId, $placed, $pickup, $extraNote, $status) {
         $this->id = $id;
         $this->userId = $userId; 
         $this->placed = $placed;
         $this->pickup = $pickup;
         $this->extraNote = $extraNote;
         $this->status =  $status;
-        $this->orderLines = $orderLines;
+        //$this->orderLines = $orderLines;
     }
     
-    public static function create($id, $userId, $placed, $pickup, $extraNote, $status, $orderLines) {
-        $order = new Orders($id, $userId, $placed, $pickup, $extraNote, $status, $orderLines);
+    public static function create($id, $userId, $placed, $pickup, $extraNote, $status) {
+        $order = new Orders($id, $userId, $placed, $pickup, $extraNote, $status);
         return $order;
     }
     
