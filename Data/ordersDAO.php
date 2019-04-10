@@ -125,4 +125,6 @@ class OrdersDAO {
             $dbh = null;
         }
         
+    }
+        
 }

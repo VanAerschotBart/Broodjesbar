@@ -1,7 +1,7 @@
 <?php  //placer.php FRITUUR
 
 require_once("business/itemsService.php");
-require_once("business/orderService.php");
+require_once("business/ordersService.php");
 require_once("business/linesService.php");
 require_once("business/extraService.php");
 require_once("business/accountService.php");
@@ -21,10 +21,10 @@ if (isset($_SESSION["user"])) {
     
     if($user->getEmployee() == 0) {  //customer handling
         
-        if(isset($_SESSION["lines"])) {  //
+        if(isset($_SESSION["lines"])) {  //check for lines in the basket
             
             if(isset($_POST['extraNote'])) {
-                $extraNote = $_POST['extraNote']
+                $extraNote = $_POST['extraNote'];
             } 
             else {
                 $extraNote = "";
@@ -35,11 +35,11 @@ if (isset($_SESSION["user"])) {
                 null,
                 $user->getId(),
                 $placed,
-                null,  //$pickup->ON HOLD
+                $_POST["pickup"],
                 $extraNote,
                 0,
                 $_SESSION["lines"]
-            )
+            );
             $orderSvc = new OrderService();
             
         }
@@ -49,12 +49,14 @@ if (isset($_SESSION["user"])) {
             exit(0);
         }
         
-        include("presentation/orders.php");
+        header("Location: orders.php");
+        exit(0);
         
     }
     else{  //employee handler
         
-        include("presentation/orders.php");
+        header("Location: orders.php");
+        exit(0);
     }
 }
 else {

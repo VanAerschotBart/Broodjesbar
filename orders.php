@@ -24,7 +24,6 @@ if (isset($_SESSION["user"])) {
         $dateTime = new DateTime();
         $diff = $dateTime->format("i") % 5;  //difference minutes from 5 last 5th minute
         date_add($dateTime, date_interval_create_from_date_string(20-$diff . " minutes"));  //buffer for pickup time (keep the auto +5min in presentation for-loop in mind!)
-       
         
     }
     else{

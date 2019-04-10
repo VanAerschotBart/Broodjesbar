@@ -49,7 +49,7 @@
         </table>
         <form action="placer.php" method="POST">
             <textarea name="extraNote"></textarea><br>
-            <select>
+            <select name="pickup">
                 
             <?php
                 //printing 10 select options with a pickup time (5min interval each)
