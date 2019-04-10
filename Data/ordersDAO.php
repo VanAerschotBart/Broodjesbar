@@ -8,7 +8,7 @@ class OrdersDAO {
 
     public function setNewOrder($order) {
         
-        $sql = "INSERT INTO orders (userId, placed, pickup, extraNote, status) VALUES (:userId, :placed, :pickup, :extra, :status)";
+        $sql = "INSERT INTO orders (userId, placed, pickup, extraNote, status) VALUES (:userId, :placed, :pickup, :extraNote, :status)";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute([

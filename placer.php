@@ -30,7 +30,7 @@ if (isset($_SESSION["user"])) {
                 $extraNote = "";
             }
             
-            $placed = date('d-m-Y-G:i');
+            $placed = date('d-m-Y/G:i');
             $order = entities\Orders::create(
                 null,
                 $user->getId(),
@@ -42,6 +42,7 @@ if (isset($_SESSION["user"])) {
             );
             $orderSvc = new OrderService();
             $orderSvc->setNewOrder($order);
+            unset($_SESSION["lines"]);
             
         }
         else {
@@ -50,8 +51,8 @@ if (isset($_SESSION["user"])) {
             exit(0);
         }
         
-        /*header("Location: orders.php");  in comment for debugging
-        exit(0);*/
+        header("Location: orders.php");
+        exit(0);
         
     }
     else{  //employee handler
