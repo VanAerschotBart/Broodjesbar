@@ -52,10 +52,18 @@
             <select>
                 
             <?php
-                for($i=20; $i<50; $i+=5) {
+                //printing 10 select options with a pickup time (5min interval each)
+                for($i=0; $i<10; $i++) {
             ?> 
                 
-                <option>Tijdstip<?php //ON HOLD print($hour . ":" . strval($minute + $i)); ?></option>
+                <option>
+                    
+                    <?php
+                        date_add($dateTime, date_interval_create_from_date_string('5 minutes'));
+                        print($dateTime->format("H:i")); 
+                    ?>
+                    
+                </option>
                 
             <?php
                 }

@@ -4,9 +4,9 @@ require_once("data/linesDAO.php");
 
 class LinesService {
 
-    public function setNewLines($lines) {
+    public function setNewLine($line) {
         $linesDAO = new LinesDAO();
-        $lineDAO->setNewLines($lines);
+        $linesDAO->setNewLines($line);
     }
     
     public function getLinesByOrderId($orderId) {

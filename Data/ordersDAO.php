@@ -2,6 +2,7 @@
 
 require_once("DBconfig.php");
 require_once("entities/orders.php");
+require_once("business/linesService.php");
 
 class OrdersDAO {
 
@@ -17,6 +18,11 @@ class OrdersDAO {
             ':extraNote' => $order->getExtraNote(),
             ':status' => $order->getStatus()
         ]);
+        $linesSvc = new LinesService();
+        
+        foreach($order->getOrderlines() as $orderLine) {
+            $linesSvc->setNewLine($OrderLine);
+        }
         
         $dbh = null;
         

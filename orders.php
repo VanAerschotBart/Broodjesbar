@@ -21,21 +21,10 @@ if (isset($_SESSION["user"])) {
     if($user->getEmployee() == 0) {
         //$orderList maken (persoonlijk)
         
-        //timestamp for pickup ON HOLD
-        /*list($hour, $minute) = explode(":", date("H:i"));
-        
-        if($minute != 0 || $minute != 5) {  //rounding the minutes up
-            
-            //TO DO: laatste char van $minute afzonderen!
-            if($minute < 5) {
-                $minute = 5;
-            }
-            else{
-                $minute = 0;
-            }
-            
-        }
-        */
+        $dateTime = new DateTime();
+        $diff = $dateTime->format("i") % 5;  //difference minutes from 5 last 5th minute
+        date_add($dateTime, date_interval_create_from_date_string(20-$diff . " minutes"));  //buffer for pickup time (keep the auto +5min in presentation for-loop in mind!)
+       
         
     }
     else{
