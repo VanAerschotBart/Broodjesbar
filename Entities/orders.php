@@ -61,9 +61,6 @@ class Orders {
         return $status;
     }
     
-    public function getOrderLines() {
-        $orderLines = $this->orderLines;
-        return $orderLines;
-    }
+   
     
 }

@@ -50,8 +50,8 @@ if (isset($_SESSION["user"])) {
             exit(0);
         }
         
-        header("Location: orders.php");
-        exit(0);
+        /*header("Location: orders.php");  in comment for debugging
+        exit(0);*/
         
     }
     else{  //employee handler
