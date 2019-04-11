@@ -25,13 +25,7 @@ class LinesDAO {
         $count = 0;
         
         foreach($lines as $line) {
-            if(is_array($line)){
-                header("location: line");
-                exit(0);
-            }
-            $lineId =$lineIdArray[$count];
-            var_dump($lineId);
-            die();
+            $lineId =$lineIdArray[$count]["id"];
             $count++;
             $extraIdArray = $line->getExtraIdArray();
             $specificationsArray = array();
@@ -98,12 +92,14 @@ class LinesDAO {
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute([':orderId' => $orderId]);
+        //$result = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if ($stmt->rowCount() > 0) {
             
             $lineIds = array();
             
             foreach($stmt as $id) {
+                
                 array_push($lineIds, $id);
             }
             
