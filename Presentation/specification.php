@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>  <!-- presentation/specification.php FRITUUR -->
+<!DOCTYPE HTML>  <!-- presentation/specifications.php FRITUUR -->
 <html>
     <head>
         <meta charset="utf-8">

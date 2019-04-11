@@ -9,19 +9,19 @@ class Lines {
     private $itemId;
     private $note;
     private $amount;
-    //private $extraIdArray = array();  //only used for basket!
+    private $extraIdArray = array();  //only used for basket!
     
-    public function __construct($id, $orderId, $itemId, $note, $amount) {
+    public function __construct($id, $orderId, $itemId, $note, $amount, $extraIdArray) {
         $this->id = $id;
         $this->orderId = $orderId;
         $this->itemId = $itemId;
         $this->note = $note;
         $this->amount = $amount;
-        //$this->extraIdArray = $extraIdArray;
+        $this->extraIdArray = $extraIdArray;
     }
     
-    public static function create($id, $orderId, $itemId, $note, $amount) {
-        $line = new Lines($id, $orderId, $itemId, $note, $amount);
+    public static function create($id, $orderId, $itemId, $note, $amount, $extraIdArray) {
+        $line = new Lines($id, $orderId, $itemId, $note, $amount, $extraIdArray);
         return $line;
     }
     
@@ -55,9 +55,9 @@ class Lines {
         return $amount;
     }
     
-    /*public function getExtraIdArray() {
+    public function getExtraIdArray() {
         $extraIdArray = $this->extraIdArray;
         return $extraIdArray;
-    }*/
+    }
     
 }

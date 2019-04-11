@@ -80,8 +80,8 @@ if(isset($_POST["amount"])) {  //only required input from user
             null,
             $_SESSION["itemId"],
             $note,
-            $amount
-            //$_SESSION["extras"]
+            $amount,
+            $_SESSION["extras"]
         );
         unset($_SESSION["itemId"]);
         unset($_SESSION["extras"]);
@@ -95,8 +95,8 @@ if(isset($_POST["amount"])) {  //only required input from user
             null,
             $_SESSION["itemId"],
             $note,
-            $amount
-            //null
+            $amount,
+            null
         );
         unset($_SESSION["itemId"]);
         array_push($_SESSION["lines"], $line); 

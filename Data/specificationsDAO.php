@@ -1,11 +1,11 @@
-<?php  //data/specificationDAO.php FRITUUR
+<?php  //data/specificationsDAO.php FRITUUR
 
 require_once("DBconfig.php");
 require_once("entities/specifications.php");
 
 class SpecificationDAO {
     
-    public function setNewSpecification($specificationArray){
+    public function setNewSpecifications($specificationArray){
         
         foreach($specificationArray as $row)
         
@@ -23,7 +23,7 @@ class SpecificationDAO {
         $sql = "SELECT extraId FROM specifications WHERE lineId = :lineId";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
-        $stmt->execute(':lineId' => $LineId);
+        $stmt->execute([':lineId' => $LineId]);
         
         if ($stmt->rowCount() > 0) {
             $list = array();
