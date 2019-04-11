@@ -24,7 +24,7 @@ if (isset($_SESSION["user"])) {
         if(isset($_SESSION["lines"])) {  //check for lines in the basket
             
             if(isset($_POST['extraNote'])) {
-                $extraNote = $_POST['extraNote'];
+                $extraNote = htmlspecialchars($_POST['extraNote']);
             } 
             else {
                 $extraNote = "";
@@ -37,10 +37,10 @@ if (isset($_SESSION["user"])) {
                 $placed,
                 $_POST["pickup"],
                 $extraNote,
-                0
-                //$_SESSION["lines"]
+                0,
+                $_SESSION["lines"]
             );
-            $orderSvc = new OrderService();
+            $orderSvc = new OrdersService();
             $orderSvc->setNewOrder($order);
             unset($_SESSION["lines"]);
             

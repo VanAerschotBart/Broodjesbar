@@ -18,11 +18,9 @@ class OrdersDAO {
             ':extraNote' => $order->getExtraNote(),
             ':status' => $order->getStatus()
         ]);
-        //$linesSvc = new LinesService();
-        
-        /*foreach($order->getOrderlines() as $orderLine) {
-            $linesSvc->setNewLine($OrderLine);
-        }*/
+        $orderId = $dbh->lastInsertId();
+        $linesSvc = new LinesService();
+        $linesSvc->setNewLines($orderId, $order->getOrderLines());
         
         $dbh = null;
         

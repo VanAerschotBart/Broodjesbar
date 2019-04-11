@@ -78,7 +78,7 @@
         <?php
         }
         
-        if(isset($orderList)) {  //check for existing orders
+        if(isset($orders)) {  //check for existing orders
         ?>
         
         <table>   
@@ -92,14 +92,14 @@
             </tr>
             
         <?php
-            foreach($orderList as $value) {  //print list of placed orders
+            foreach($orders as $value) {  //print list of placed orders
         ?>
                 <tr>
                     <td><?php print($value->getId()); ?></td>
                     <td><?php print($value->getUserId()); ?></td>
                     <td><?php print($value->getPlaced()); ?></td>
                     <td><?php print($value->getPickup()); ?></td>
-                    <td><?php print($value->getExtra()); ?></td>
+                    <td><?php print($value->getExtraNote()); ?></td>
                     <td><?php print($value->getStatus()); ?></td>
                 </tr>
                 
