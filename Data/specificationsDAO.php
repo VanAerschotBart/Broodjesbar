@@ -9,6 +9,8 @@ class SpecificationsDAO {
         $sql = "INSERT INTO specifications (lineId, extraId) VALUES ";
         
         foreach($specificationsArray as $specification) {
+            var_dump($specification->getLineId());
+            var_dump($specification->getExtraId());
             $sql .= "(" . $specification->getLineId()  . ", " . $specification->getExtraId() . "), ";
         }
         
