@@ -18,22 +18,34 @@ class LinesDAO {
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
+        $dbh = null;
         
         $linesDAO = new LinesDAO();
-        $lineIds = $linesDAO->getLineIdsByOrderId($orderId);
+        $lineIdArray = $linesDAO->getLineIdsByOrderId($orderId);
+        $count = 0;
         
         foreach($lines as $line) {
-            $lineId =$lineIds[$count];
-            $line->setId($lineId);
-            $idArray = $line->getExtraIdArray();
-            if(!empty($idArray)) {
-                $specificationsSvc = new SpecificationsService();
-                $specificationsSvc()->setNewSpecifications($line->getId, $line->getExtraIdArray());
+            $lineId =$lineIdArray[$count];
+            $count++;
+            $extraIdArray = $line->getExtraIdArray();
+            $specificationsArray = array();
+            
+            if($extraIdArray != null) {
+                
+                foreach($extraIdArray as $extraId) {
+                    $specification = entities\Specification::create(
+                        $lineId,
+                        $extraId
+                    );
+                    array_push($specificationsArray, $specification);
+                }
+                
             }
             
+            $specificationsSvc = new SpecificationsService();
+            $specificationsSvc->setNewSpecifications($specificationsArray);
+            
         }
-        
-        $dbh = null;
         
     }
     

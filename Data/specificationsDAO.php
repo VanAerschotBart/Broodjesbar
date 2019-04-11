@@ -3,20 +3,20 @@
 require_once("DBconfig.php");
 require_once("entities/specifications.php");
 
-class SpecificationDAO {
+class SpecificationsDAO {
     
-    public function setNewSpecifications($specificationArray){
+    public function setNewSpecifications($specificationsArray){
+        $sql = "INSERT INTO specifications (lineId, extraId) VALUES ";
         
-        foreach($specificationArray as $row)
+        foreach($specificationsArray as $specification) {
+            $sql .= "(" . $specification->getLineId()  . ", " . $specification->getExtraId() . "), ";
+        }
         
-            $sql = "INSERT INTO specifications (lineId, extraId) VALUES (:lineId, :extraId)";
-            $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
-            $stmt = $dbh->prepare($sql);
-            $stmt->execute([
-                ':name' => $specification->getLineId(),
-                ':email' => $specification->getExtraId()
-            ]);
-            $dbh = null;
+        $sql = rtrim($sql, ', ');
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        $dbh = null;
     }
 
     public function getSpecificationsByLineId($lineId) {

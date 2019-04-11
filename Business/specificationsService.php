@@ -4,9 +4,9 @@ require_once("data/specificationsDAO.php");
 
 class SpecificationsService {
 
-    public function setNewSpecifications($lineId, $specificationsArray){
+    public function setNewSpecifications($specificationsArray){
         $specificationsDAO = new SpecificationsDAO();
-        $specificationsDAO->setNewSpecifications($lineId, $specificationsArray);
+        $specificationsDAO->setNewSpecifications($specificationsArray);
     }
 
     public function getSpecificationsByLineId($lineId){

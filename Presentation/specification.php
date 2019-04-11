@@ -28,7 +28,7 @@
         ?>
                 
                 <li>
-                    <input type="checkbox" name="extra<?php print($sauce->getId()); ?>">
+                    <input type="checkbox" name="specification<?php print($sauce->getId()); ?>">
                     <?php print($sauce->getName()); ?>
                 </li>
                 
@@ -52,7 +52,7 @@
         ?>
                 
                 <li>
-                    <input type="checkbox" name="extra<?php print($topping->getId()); ?>">
+                    <input type="checkbox" name="specification<?php print($topping->getId()); ?>">
                     <?php print($topping->getName()); ?>
                 </li>
                 
@@ -76,7 +76,7 @@
         ?>
                 
                 <li>
-                    <input type="checkbox" name="extra<?php print($ingredient->getId()); ?>">
+                    <input type="checkbox" name="specification<?php print($ingredient->getId()); ?>">
                     <?php print($ingredient->getName()); ?>
                 </li>
                 

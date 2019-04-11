@@ -49,9 +49,11 @@ if(isset($_POST["amount"])) {  //only required input from user
     //collecting the desired extras
     $extraSvc = new ExtraService();
     $idList = $extraSvc->getAllIds();
+    $extraArray = array();
+
     
     foreach($idList as $id) {
-        $text = "extra" . $id;
+        $text = "specification" . $id;
         
         if(isset($_POST[$text])) {  //was the checkbox checked or not?
             
@@ -59,11 +61,7 @@ if(isset($_POST["amount"])) {  //only required input from user
             
             if($extra != null) {  //if not null, there was a valid id given
                 
-                if(!isset($_SESSION["extras"])) {  //creating a session array if not already set
-                    $_SESSION["extras"] = array();
-                }
-                
-                array_push($_SESSION["extras"], $extra->getId());  //adding the id to the array
+                array_push($extraArray, $id);  //adding the id to the array
                 
             }
             
@@ -73,7 +71,7 @@ if(isset($_POST["amount"])) {  //only required input from user
     
     
     //creating a line and adding it to the session array
-    if(isset($_SESSION["extras"])){  //differentiate between a line with or without specifications
+    if(!empty($extraArray)){  //differentiate between a line with or without specifications
         
         $line = entities\Lines::create(
             null,
@@ -81,10 +79,9 @@ if(isset($_POST["amount"])) {  //only required input from user
             $_SESSION["itemId"],
             $note,
             $amount,
-            $_SESSION["extras"]
+            $extraArray
         );
         unset($_SESSION["itemId"]);
-        unset($_SESSION["extras"]);
         array_push($_SESSION["lines"], $line);
         
     }
@@ -99,7 +96,7 @@ if(isset($_POST["amount"])) {  //only required input from user
             null
         );
         unset($_SESSION["itemId"]);
-        array_push($_SESSION["lines"], $line); 
+        array_push($_SESSION["lines"], $line);
         
     }
     

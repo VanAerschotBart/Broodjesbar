@@ -48,7 +48,7 @@ class OrdersDAO {
             );
             
             $dbh = null;
-            return $list;
+            return $order;
             
         }
         else {
@@ -65,6 +65,8 @@ class OrdersDAO {
         $stmt->execute([':userId' => $id]);
         
         if ($stmt->rowCount() > 0) {
+            
+            $list = array();
             
             foreach($stmt as $row) {
                 
@@ -99,6 +101,8 @@ class OrdersDAO {
         $stmt->execute();
         
         if ($stmt->rowCount() > 0) {
+            
+            $list = array();
             
             foreach($stmt as $row) {
                 
