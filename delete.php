@@ -19,7 +19,8 @@ if (isset($_SESSION["user"])) {
         }
         
     }
-    
-    header("Location: list.php");
-    exit(0);
+
 }
+
+header("Location: list.php");
+exit(0);

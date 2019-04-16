@@ -28,3 +28,6 @@ class ItemsService {
     }
     
 }
+
+//INSERT INTO items (name, description, price) VALUES ("test", "testerdetest", 5);
+// Wrap kip/spek	Kip natuur, spek, BBQ saus, sla, tomaat en komkommer	4.00
