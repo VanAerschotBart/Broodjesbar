@@ -79,5 +79,13 @@ class ItemsDAO {
         }
          
     }
+    
+    public function deleteItem($id) {
+        $sql = "DELETE FROM items WHERE id = :id";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        $dbh = null;
+    }
 
 }

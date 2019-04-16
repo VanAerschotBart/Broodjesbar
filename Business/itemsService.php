@@ -22,4 +22,9 @@ class ItemsService {
         return $answer;
     }
     
+    public function deleteItem($id) {
+        $itemsDAO = new ItemsDAO();
+        $answer = $itemsDAO->deleteItem($id);
+    }
+    
 }
