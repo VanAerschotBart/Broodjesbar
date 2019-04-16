@@ -17,6 +17,13 @@ if(isset($_SESSION["errorText"])) {
 
 if (isset($_SESSION["user"])) {
     
+    if(isset($_GET["forget"])) {
+        $id = $_GET["forget"];
+        unset($_SESSION["lines"][$id]);
+        header("Location: orders.php");
+        exit(0);
+    }
+    
     $user = $_SESSION["user"];
     
     if($user->getEmployee() == 0) {

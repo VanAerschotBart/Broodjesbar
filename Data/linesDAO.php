@@ -22,21 +22,17 @@ class LinesDAO {
         
         $linesDAO = new LinesDAO();
         $lineIdArray = $linesDAO->getLineIdsByOrderId($orderId);
+        $specificationsArray = array();
         $count = 0;
         
         foreach($lines as $line) {
-            $lineId =$lineIdArray[$count]["id"];
+            $lineId = $lineIdArray[$count]["id"];
             $count++;
             $extraIdArray = $line->getExtraIdArray();
-            $specificationsArray = array();
             
             if($extraIdArray != null) {
                 
                 foreach($extraIdArray as $extraId) {
-                    if(is_array($extraId)){
-                        header("location: extraId");
-                        exit(0);
-                    }
                     $specification = entities\Specification::create(
                         $lineId,
                         $extraId
@@ -46,10 +42,10 @@ class LinesDAO {
                 
             }
             
-            $specificationsSvc = new SpecificationsService();
-            $specificationsSvc->setNewSpecifications($specificationsArray);
-            
         }
+        
+        $specificationsSvc = new SpecificationsService();
+        $specificationsSvc->setNewSpecifications($specificationsArray);
         
     }
     

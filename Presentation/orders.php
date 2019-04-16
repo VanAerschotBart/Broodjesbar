@@ -23,7 +23,7 @@
             
             if(isset($_SESSION["lines"])) {
                 
-                foreach($_SESSION["lines"] as $line) {
+                foreach($_SESSION["lines"] as $id => $line) {
                     $item = $itemSvc->getById($line->getItemId());
         ?>
         
@@ -35,10 +35,13 @@
                     <?php print($line->getAmount()); ?>
                 </td>
                 <td style="text-align: right;">
-                    <?php $price = $item->getPrice() * $line->getAmount(); print($price); ?>
+                    <?php print($item->getPrice() * $line->getAmount()); ?>
                 </td>
                 <td style="text-align: right;">
                     <?php print($line->getNote()); ?>
+                </td>
+                <td>
+                    <a href="orders.php?forget=<?php print($id); ?>">Uit mandje verwijderen</a>
                 </td>
             </tr>
             

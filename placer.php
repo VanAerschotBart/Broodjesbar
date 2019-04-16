@@ -30,12 +30,22 @@ if (isset($_SESSION["user"])) {
                 $extraNote = "";
             }
             
+            //pickup time check
+            $pickup = $_POST["pickup"];
+            $firstPickup = new DateTime();
+            $diff = $firstPickup->format("i") % 5;  //difference minutes from 5 last 5th minute
+            date_add($firstPickup, date_interval_create_from_date_string(25-$diff . " minutes"));  //buffer for pickup time
+            
+            if($pickup < $firstPickup) {
+                $pickup = $firstPickup->format("H:i");
+            }
+            
             $placed = date('d-m-Y/G:i');
             $order = entities\Orders::create(
                 null,
                 $user->getId(),
                 $placed,
-                $_POST["pickup"],
+                $pickup,
                 $extraNote,
                 0,
                 $_SESSION["lines"]
