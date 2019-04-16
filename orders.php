@@ -39,7 +39,8 @@ if (isset($_SESSION["user"])) {
         
     }
     else{
-        //$orderList maken (alle)
+        $orderSvc = new OrdersService();
+        $orders = $orderSvc->getAllOrders();
     }
     
     include("presentation/orders.php");
