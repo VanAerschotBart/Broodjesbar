@@ -1,0 +1,43 @@
+<?php  //adjust.php  //FRITUUR
+
+require_once("business/accountService.php");
+require_once("business/itemsService.php");
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION["user"])) {
+    
+    $user = $_SESSION["user"];
+    
+    if($user->getEmployee() == 1) {
+        
+        if(isset($_GET["id"])) {
+            
+            $itemSvc = new ItemService();
+            $item = $itemSvc->getById($_GET["id"]);
+            
+        }
+        elseif(isset($_POST[""])) {
+            
+            $itemSvc = new ItemService();
+            $itemSvc->adjustItem();
+            
+        }
+        else {
+            header("Location: list.php");
+            exit(0);          
+        }
+        
+    }
+    else{
+        header("Location: list.php");
+        exit(0);
+    }
+
+}
+else {
+    header("Location: list.php");
+    exit(0);
+}
