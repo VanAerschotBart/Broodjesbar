@@ -7,5 +7,11 @@
     </head>
     <body>
         <h1>Item aanpassen</h1>
+        <ul>
+            <li>naam</li>
+            <li>omschrijving</li>
+            <li>prijs</li>
+        </ul>
+        <p>checkboxes voor sauzen/ingrediënten/toppings maken</p>
     </body>
 </html>
