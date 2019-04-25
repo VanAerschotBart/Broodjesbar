@@ -14,8 +14,8 @@ if (isset($_SESSION["user"])) {
     if($user->getEmployee() == 1) {
         
         if(isset($_GET["id"])) {            
-            $itemSvc = new ItemService();
-            $item = $itemSvc->getById($_GET["id"]);
+            $itemsSvc = new ItemsService();
+            $item = $itemsSvc->getById($_GET["id"]);
             
             if($item != null) {              
                 include("presentation/adjust.php");
