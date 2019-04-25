@@ -27,7 +27,12 @@ class ItemsService {
         $answer = $itemsDAO->deleteItem($id);
     }
     
+    public function adjustItem() {
+        $itemsDAO = new ItemsDAO();
+        $answer = $itemsDAO->deleteItem();
+    }
+    
 }
 
 //INSERT INTO items (name, description, price) VALUES ("test", "testerdetest", 5);
-// Wrap kip/spek	Kip natuur, spek, BBQ saus, sla, tomaat en komkommer	4.00
+// Wrap kip/spek	Kip natuur, spek, BBQ saus, sla, tomaat en komkommer	4.00 

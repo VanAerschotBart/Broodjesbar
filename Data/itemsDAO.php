@@ -87,5 +87,13 @@ class ItemsDAO {
         $stmt->execute([':id' => $id]);
         $dbh = null;
     }
+    
+    public function adjustItem() {
+        $sql = "";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        $dbh = null;
+    }
 
 }
