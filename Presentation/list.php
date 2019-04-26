@@ -7,14 +7,14 @@
     <body>
         <h1>Lijst</h1>
         
-        <?php
-        if(!isset($_SESSION["user"])) {//if not logged in, build a log in and a link to register for unregistered user  
+        <?php 
+        if(!isset($_SESSION["user"])) {  //if not logged in, build a log in and a link to register for unregistered user  
         ?>    
         
         <form action='login.php' method='POST'>
             
         <?php            
-            if(isset($_COOKIE["user"])) {//check for known user
+            if(isset($_COOKIE["user"])) {  //check for known user
                 $mail = $_COOKIE["user"];
         ?>
             
