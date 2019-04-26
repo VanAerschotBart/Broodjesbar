@@ -7,11 +7,12 @@
     </head>
     <body>
         <h1>Item aanpassen</h1>
-        <ul>
-            <li>naam</li>
-            <li>omschrijving</li>
-            <li>prijs</li>
-        </ul>
+        <form action="adjust.php" method="POST">
+            Naam:<input type="text" name="itemName"><br>
+            Beschrijving:<input type="text" name="description"><br>
+            Prijs:<input type="text" name="price"><br>
+            <input type="submit" value="Aanpassen">
+        </form>
         <p>checkboxes voor sauzen/ingrediënten/toppings maken</p>
     </body>
 </html>

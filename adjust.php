@@ -21,7 +21,7 @@ if (isset($_SESSION["user"])) {
                 include("presentation/adjust.php");
             }
             else {
-                $_SESSION["errorText"] = "Onbekende ID om aan te passen!";                
+                $_SESSION["errorText"] = "<h1 style='color: red;'>Onbekende ID om aan te passen!</h1>";                
                 header("Location: list.php");
                 exit(0);
             }
