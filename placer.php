@@ -32,12 +32,14 @@ if (isset($_SESSION["user"])) {
             
             //pickup time check
             $pickup = $_POST["pickup"];
-            $firstPickup = new DateTime();
-            $diff = $firstPickup->format("i") % 5;  //difference minutes from 5 last 5th minute
-            date_add($firstPickup, date_interval_create_from_date_string(25-$diff . " minutes"));  //buffer for pickup time
-            
+            $dateTime = new DateTime();
+            $diff = $dateTime->format("i") % 5;  //difference minutes from 5 last 5th minute
+            date_add($dateTime, date_interval_create_from_date_string(25-$diff . " minutes"));
+            $firstPickup = $dateTime->format("H:i");
+                
+            //buffer for pickup time            
             if($pickup < $firstPickup) {
-                $pickup = $firstPickup->format("H:i");
+                $pickup = $firstPickup;
             }
             
             $placed = date('d-m-Y/G:i');
